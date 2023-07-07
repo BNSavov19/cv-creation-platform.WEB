@@ -9,11 +9,13 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "generate-api": "java -jar swagger-codegen-cli.jar generate -i http://localhost:5217/swagger/v1/swagger.json -l typescript-axios -o src/api/ && clear-api.sh"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.3",
+    "axios": "^1.4.0",
     "vue": "^3.3.4",
     "vue-router": "^4.2.2"
   },

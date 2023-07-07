@@ -21,12 +21,23 @@
 
 <script lang="ts" setup>
 import LoginForm from '@/components/forms/LoginForm.vue' 
-import userService from '@/services/user-service'
+import router from '@/router';
+import authService from '@/services/authentication-service';
+import storageService from '@/services/storage-service';
+import { onMounted } from 'vue';
 
-function onLoginAttempt(username: string, password: string)
+onMounted(()=>{
+    if(storageService.checkForUserLogin()) router.push({name:'dashboard'});
+})
+
+function onLoginAttempt(form: any)
 {
-    console.log('sending req', username, password);
-    //userService.loginUser(username, password);
+    authService.makeLoginRequest(form.username, form.password).then((res) => {
+        storageService.saveToken(res.data as unknown as string);
+        if(storageService.checkForUserLogin()) router.push({name:'dashboard'});
+    }).catch((error) => {
+        console.log(error);
+    });
 }
 </script>
 

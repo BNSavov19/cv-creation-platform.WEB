@@ -8,7 +8,7 @@
             <div class="main-content">
                 <h1 class="dashboard-title">Boost your chances of landing your dream job</h1>
                 <p class="dashboard-description">Create eye catching resumes in minutes.</p>
-                <a class="create-cv-button" href="#">Create CV</a>
+                <button class="create-cv-button" @click="onCreateCVButtonClick">Create CV</button>
             </div>
         </div>
     
@@ -19,6 +19,23 @@
 </template>
 
 <script lang="ts" setup> 
+import router from '@/router';
+import storageService from '@/services/storage-service';
+import { onMounted } from 'vue';
+
+onMounted(()=>{
+    if(storageService.checkForUserLogin()) router.push({name:'dashboard'});
+})
+
+function onCreateCVButtonClick()
+{
+    if(storageService.checkForUserLogin()) {
+        router.push({name:'dashboard'});
+    }
+    else {
+        router.push({name:'login'});
+    }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -54,6 +71,9 @@
         }
 
         .create-cv-button {
+            outline: none;
+            border: none;
+            cursor: pointer;
             font-size: 1.25rem;
             font-weight: 600;
             font-family: 'Manrope';
