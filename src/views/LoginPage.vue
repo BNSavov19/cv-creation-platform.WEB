@@ -1,8 +1,22 @@
 <template>
-    <h1>Login</h1>
-    <LoginForm @login:form:submitted="onLoginAttempt"></LoginForm>
+    <div class="site-wrapper">
+        <header class="page-header">
+            <h2 class="header-logo"><RouterLink :to="{path:'/'}"><span class="logo-text">Resu</span><span class="logo-suffix">.me</span></RouterLink></h2>
+        </header>
+        
+        <div class="content-wrapper">
+            <div class="sign-in-form-wrapper">
+                <h1 class="form-title">Sign in</h1>
+                <LoginForm @login:form:submitted="onLoginAttempt"></LoginForm>
+            
+                <span class="no-account-link">Don't have an account? <RouterLink :to="{path:'/auth/register'}"><span class="sign-up-button">Sign up</span></RouterLink></span>
+            </div>
+        </div>
     
-    <span>Don't have an account? <RouterLink :to="{path:'/auth/register'}"><span class="sign-up-button">Sign up</span></RouterLink></span>
+        <footer class="page-footer">
+            <p class="footer-text">&copy; 2023 Resu.me All rights reserved.</p>
+        </footer>
+    </div>
 </template>
 
 <script lang="ts" setup>
@@ -17,9 +31,5 @@ function onLoginAttempt(username: string, password: string)
 </script>
 
 <style lang="scss" scoped>
-.sign-up-button {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
+    @import '../css/login-page.scss';
 </style>

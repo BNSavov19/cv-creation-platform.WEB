@@ -1,0 +1,33 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+  
+ol, ul {
+    list-style: none;
+}
+  
+button, input, select, textarea {
+    outline: none;
+} 
+
+a {
+    text-decoration: none;
+}
+
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.5;
+}
+
+$primary-color: #1c1c1c;
+$secondary-color: #5a5a5a;
+$accent-color: #2a83fe;
+$background-color: #e9e9e9;
+$error-text: rgb(38, 7, 7);
+$error-background: rgb(235, 163, 163);
+
+@mixin transition-ease {
+    transition: all 0.3s ease-in-out;
+}

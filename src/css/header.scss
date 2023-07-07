@@ -1,0 +1,21 @@
+.page-header {
+    position: fixed;
+    background-color: white;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+    box-shadow: 1px 15px 33px -13px rgba(42,131,254,0.19);
+
+    .header-logo {
+        font-weight: 600;
+
+        .logo-text {
+            color: $primary-color;
+        }
+
+        .logo-suffix {
+            color: $accent-color;
+        }
+    }
+}

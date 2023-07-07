@@ -1,19 +1,17 @@
 <template>
     <form @submit.prevent="onFormSubmit">
-        <input type="text" placeholder="Username" v-model="form.username">
-        <span v-if="vuelidate.username.$error">{{vuelidate.username.$errors[0].$message}}</span>
+        <input type="text" :class="{ 'error': vuelidate.username.$error }" :placeholder="vuelidate.username.$error ? vuelidate.username.$errors[0].$message : 'Username'" v-model="form.username">
 
-        <input type="password" placeholder="password" v-model="form.password">
-        <span v-if="vuelidate.password.$error">{{vuelidate.password.$errors[0].$message}}</span>
+        <input type="password" :class="{ 'error': vuelidate.password.$error }" :placeholder="vuelidate.password.$error ? vuelidate.password.$errors[0].$message : 'Password'" v-model="form.password">
 
-        <button type="submit">Login</button>
+        <button type="submit">Sign in</button>
     </form>
 </template>
 
 <script lang="ts" setup>
 import { ref, type Ref } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
-import { required, helpers, minLength} from '@vuelidate/validators'
+import { required, helpers} from '@vuelidate/validators'
 
 const emits = defineEmits(['login:form:submitted'])
 
@@ -24,11 +22,10 @@ let form = ref({
 
 const rules = {
     username: {
-        required: helpers.withMessage('username is required', required)
+        required: helpers.withMessage('Please enter a username.', required)
     },
     password: {
-        required: helpers.withMessage('password is required', required),
-        password: helpers.withMessage('password must be at least 8 characters', minLength(8))
+        required: helpers.withMessage('Please enter a password.', required)
     }
 }
 
@@ -48,4 +45,5 @@ async function onFormSubmit()
 </script>
 
 <style lang="scss" scoped>
+    @import '../../css/login-form.scss';
 </style>
