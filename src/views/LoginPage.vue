@@ -31,5 +31,48 @@ function onLoginAttempt(username: string, password: string)
 </script>
 
 <style lang="scss" scoped>
-    @import '../css/login-page.scss';
+@import '../styles/imports.scss';
+
+.site-wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+    .content-wrapper {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
+
+        .sign-in-form-wrapper {
+            border-radius: 2rem;
+            box-shadow: 0px 100px 193px -35px rgba(42, 131, 254, 0.15);
+            text-align: center;
+            padding: 4rem;
+
+            .form-title {
+                margin-bottom: 4rem;
+                font-size: 3rem;
+                font-family: 'Hanken Grotesk';
+                font-style: normal;
+                font-weight: 800;
+                color: #1C1C1C;
+            }
+
+            .no-account-link {
+                font-size: 1.2rem;
+                color: $secondary-color;
+                font-family: Hanken Grotesk;
+
+                .sign-up-button {
+                    color: $accent-color;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
 </style>

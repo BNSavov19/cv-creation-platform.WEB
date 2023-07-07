@@ -1,11 +1,12 @@
 .page-header {
     position: fixed;
-    background-color: white;
     top: 0;
     left: 0;
     width: 100%;
     padding: 1rem;
-    box-shadow: 1px 15px 33px -13px rgba(42,131,254,0.19);
+    border-bottom: 1px solid #E7E9ED;
+    background: rgba(255, 255, 255, 0.51);
+    backdrop-filter: blur(13px);
 
     .header-logo {
         font-weight: 600;
