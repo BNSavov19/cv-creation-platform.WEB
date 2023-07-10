@@ -7,7 +7,7 @@
         <div class="content-wrapper">
             <div class="sign-in-form-wrapper">
                 <h1 class="form-title">Sign up</h1>
-                <RegisterForm></RegisterForm>
+                <RegisterForm @register:form:submitted="onRegisterAttempt"></RegisterForm>
             
                 <span class="have-account-link">Already have an account? <RouterLink :to="{path:'/auth/login'}"><span class="sign-in-button">Sign in</span></RouterLink></span>
             </div>
@@ -21,6 +21,23 @@
 
 <script lang="ts" setup>
 import RegisterForm from '@/components/forms/RegisterForm.vue' 
+import router from '@/router';
+import authService from '@/services/authentication-service';
+import storageService from '@/services/storage-service';
+
+function onRegisterAttempt(form: any)
+{
+    authService.makeRegisterRequest(form.username, form.password, form.password).then((res) => {
+        authService.makeLoginRequest(form.username, form.password).then((res) => {
+            storageService.saveToken(res.data as unknown as string);
+            if(storageService.checkForUserLogin()) router.push({name:'dashboard'});
+        }).catch((error) => {
+            console.log(error);
+        });
+    }).catch((error) => {
+        console.log(error);
+    });
+}
 </script>
 
 <style lang="scss" scoped>
