@@ -2,6 +2,10 @@
     <div class="site-wrapper">
         <header class="page-header">
             <h2 class="header-logo"><RouterLink :to="{path:'/'}"><span class="logo-text">Resu</span><span class="logo-suffix">.me</span></RouterLink></h2>
+            <div class="buttons">
+                <button class="login-button"><RouterLink :to="{path:'/auth/login/'}">Login</RouterLink></button> 
+                <button class="signup-button"><RouterLink :to="{path:'/auth/register/'}">Sign up</RouterLink></button> 
+            </div> 
         </header>
 
         <div class="content-wrapper">
