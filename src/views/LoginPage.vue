@@ -59,7 +59,7 @@ function onLoginAttempt(form: any)
 
         .sign-in-form-wrapper {
             border-radius: 2rem;
-            box-shadow: 0px 100px 193px -35px rgba(42, 131, 254, 0.15);
+            box-shadow: 0px 100px 193px -35px rgba(42, 131, 254, 0.25);
             text-align: center;
             padding: 4rem;
 
@@ -79,7 +79,10 @@ function onLoginAttempt(form: any)
 
                 .sign-up-button {
                     color: $accent-color;
-                    text-decoration: underline;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
                 }
             }
         }

@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@100;300;400;500;600;700;800;900&family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+button, input, select, textarea {
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.5;
+}
+
+.page-footer {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+  color: #5a5a5a;
+}
+
+.page-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  border-bottom: 1px solid #E7E9ED;
+  background: rgba(255, 255, 255, 0.51);
+  -webkit-backdrop-filter: blur(13px);
+          backdrop-filter: blur(13px);
+}
+.page-header .header-logo {
+  font-weight: 600;
+}
+.page-header .header-logo .logo-text {
+  color: #1c1c1c;
+}
+.page-header .header-logo .logo-suffix {
+  color: #2a83fe;
+}/*# sourceMappingURL=imports.css.map */

@@ -4,48 +4,59 @@
             <input type="text" placeholder="Username" v-model="form.username" />
             <span class="error" v-if="vuelidate.username.$error">{{ vuelidate.username.$errors[0].$message }}</span>
         </div>
+        
+        <div class="input-wrapper">
+            <input type="text" placeholder="Email" v-model="form.email" />
+            <span class="error" v-if="vuelidate.email.$error">{{ vuelidate.email.$errors[0].$message }}</span>
+        </div>
 
         <div class="input-wrapper">
             <input type="text" placeholder="Password" v-model="form.password" />
             <span class="error" v-if="vuelidate.password.$error">{{ vuelidate.password.$errors[0].$message }}</span>
         </div>
 
-        <button type="submit">Sign in</button>
+        <button type="submit">Sign up</button>
     </form>
 </template>
 
 <script lang="ts" setup>
-import { ref, type Ref } from 'vue';
+import { ref } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
-import { required, helpers} from '@vuelidate/validators'
+import { required, email, minLength, helpers } from '@vuelidate/validators'
 
-const emits = defineEmits(['login:form:submitted'])
+const emits = defineEmits(['register:form:submitted'])
 
 let form = ref({
     username: '',
+    email: '',
     password: '',
 });
 
 const rules = {
     username: {
-        required: helpers.withMessage('Please enter a username.', required)
+        required: helpers.withMessage('Please enter a username.', required),
+        minLength: helpers.withMessage('Username must be at least 3 characters long.', minLength(3))
+    },
+    email: {
+        required: helpers.withMessage('Please enter an email.', required),
+        email: helpers.withMessage('Please enter a valid email.', email)
     },
     password: {
-        required: helpers.withMessage('Please enter a password.', required)
-    }
+        required: helpers.withMessage('Please enter a password.', required),
+        minLength: helpers.withMessage('Password must be at least 8 characters long.', minLength(8))
+    },
 }
 
 const vuelidate = useVuelidate(rules, form);
 
-async function onFormSubmit()
-{
+async function onFormSubmit() {
     const isValid = await vuelidate.value.$validate();
     
-    if(!isValid) {
+    if (!isValid) {
         return;
     }
 
-    emits('login:form:submitted', form.value);
+    emits('register:form:submitted', form.value);
     vuelidate.value.$reset();
 }
 
