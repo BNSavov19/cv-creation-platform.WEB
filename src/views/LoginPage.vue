@@ -47,7 +47,8 @@ function onLoginAttempt(form: any)
 .site-wrapper {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 99vh;
+    margin: -0.4rem;
 
     .content-wrapper {
         flex-grow: 1;
@@ -86,6 +87,13 @@ function onLoginAttempt(form: any)
                 }
             }
         }
+    }
+}
+
+@media (max-width: 576px) and (orientation: portrait) {
+    .sign-in-form-wrapper {
+        transform: scale(0.75);
+        margin-bottom: 7rem;
     }
 }
 

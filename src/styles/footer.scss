@@ -1,6 +1,13 @@
 .page-footer {
-    margin-top: auto;
     width: 100%;
+    height: 2.5rem;
     text-align: center;
     color: $secondary-color;
+}
+
+@media (max-width: 576px) and (orientation: portrait) {
+    .page-footer {
+        height: 2rem;
+        font-size: 0.8rem;
+    }
 }

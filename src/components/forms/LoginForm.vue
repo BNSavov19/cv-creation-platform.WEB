@@ -124,4 +124,16 @@ form {
         }
     }
 }
+
+@media (max-width: 576px) and (orientation: portrait) {
+    .input-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .error {
+            margin: 21rem auto;
+            width: 23rem;
+        }
+    }
+}
 </style>

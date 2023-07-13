@@ -10,9 +10,11 @@
 
         <div class="content-wrapper">
             <div class="main-content">
-                <h1 class="dashboard-title">Boost your chances of landing your dream job</h1>
-                <p class="dashboard-description">Create eye catching resumes in minutes.</p>
-                <button class="create-cv-button" @click="onCreateCVButtonClick">Create CV</button>
+                <h1 class="landing-title">Boost your chances of landing your dream job</h1>
+                <p class="landing-description">Create eye catching resumes in minutes.</p>
+                <div class="button-wrapper">
+                    <button class="create-cv-button" @click="onCreateCVButtonClick">Create CV</button>
+                </div>
             </div>
         </div>
     
@@ -46,47 +48,65 @@ function onCreateCVButtonClick()
 @import '../styles/imports.scss';
 
 .site-wrapper {
+    margin: -0.4rem;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
-
+    justify-content: space-between;
+    min-height: 99vh;
     .content-wrapper {
         display: flex;
         justify-content: flex-start;
-        flex-grow: 1;
-        align-items: center;
-        margin-left: 10rem;
+        .main-content {
+            padding: 3rem;
+            border-radius: 3rem;
+            box-shadow: 0px 0px 106px 16px rgba(41,130,254,0.2);
+            margin-left: 5rem;
+            
+            .landing-title {
+                font-size: 4rem;
+                max-width: 50rem;
+                font-weight: 600;
+                line-height: 1.3;
+                font-family: 'Manrope';
+                font-style: normal;
+                font-weight: 700;
+            }
+    
+            .landing-description {
+                font-size: 1.5rem;
+                margin: 1.5rem 0 3rem 0;
+                color: $secondary-color;
+            }
+    
+            .create-cv-button {
+                outline: none;
+                border: none;
+                cursor: pointer;
+                font-size: 1.25rem;
+                font-weight: 600;
+                font-family: 'Manrope';
+                font-style: normal;
+                color: white;
+                box-shadow: 0px 14px 16px -3px rgba(42,131,254,0.19);
+                background-color: $accent-color;
+                padding: 1rem 2.8rem;
+                border-radius: 1rem;
+            }
+        }   
+    }
+}
 
-        .dashboard-title {
-            font-size: 4rem;
-            max-width: 50rem;
-            font-weight: 600;
-            line-height: 1.3;
-            font-family: 'Manrope';
-            font-style: normal;
-            font-weight: 700;
-            letter-spacing: -1.574px;
-        }
-
-        .dashboard-description {
-            font-size: 1.5rem;
-            margin: 1.5rem 0 3rem 0;
-            color: $secondary-color;
-        }
-
-        .create-cv-button {
-            outline: none;
-            border: none;
-            cursor: pointer;
-            font-size: 1.25rem;
-            font-weight: 600;
-            font-family: 'Manrope';
-            font-style: normal;
-            color: white;
-            box-shadow: 0px 14px 16px -3px rgba(42,131,254,0.19);
-            background-color: $accent-color;
-            padding: 1rem 2.8rem;
-            border-radius: 1rem;
+@media (max-width: 576px) and (orientation: portrait) {
+    .site-wrapper {
+        .content-wrapper {
+            transform: scale(0.765);
+            .main-content {
+                margin-left: 0;
+                text-align: center;
+                .landing-title {
+                    font-size: 2rem;
+                }
+            }
         }
     }
 }
