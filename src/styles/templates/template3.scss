@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700&display=swap');
+
+@mixin gradient-text-color {
+    background: linear-gradient(to right, #d322c0 0%, #6114ed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+} 
+
+.template-template3 {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    width: 595px;
+    height: 842px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    overflow: hidden;
+    background: white;
+    color: black;
+
+
+    .sections-wrapper {
+        display: flex;
+        flex-direction: column;
+
+        .section {
+            display: flex;
+            flex-direction: column;
+            border-bottom: 1px solid rgb(196, 196, 196);
+            margin-bottom: 1rem;
+            font-size: .7rem;
+
+            .title {
+                font-size: 1rem;
+            }
+
+            .duration {
+                @include gradient-text-color();
+                font-size: .7rem;
+                padding-bottom: 0.25rem;
+            }
+
+            .position-or-degree {
+                color: rgb(117, 117, 117);
+                font-size: 1.2rem;
+                padding-bottom: 0.25rem;
+            }
+
+            .company-or-institution {
+                padding-bottom: 0.25rem;
+                font-size: 1.3rem;
+                font-weight: 400;
+            }
+
+            .description {
+                line-height: 1.5;
+            }
+        }
+    }
+    .top-section {
+        margin: 3rem 3rem 1rem 3rem;
+
+        .title {
+            font-size: 1.5rem;
+        }        
+
+        .info {
+            font-size: .7rem;
+        }
+
+        .contact-information {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-gap: 0.75rem;
+
+            .info-tag {
+                @include gradient-text-color();
+                padding-right: 0.5rem;
+            }
+
+            .info-link {
+                color: black;
+                font-weight: 400;
+            }
+        }
+
+        .user-image {
+            width: 15rem;
+            height: 15rem;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 2rem 2rem 0 0;
+        }
+    }
+
+    .sections-wrapper {
+        display: flex;
+        margin: 0 3rem;
+
+        .left-side-sections {
+            width: 50rem;
+            margin-right: 4rem;
+        }
+    
+        .right-side-sections {
+            width: 25rem;
+            display: flex;
+            flex-direction: column;
+
+            .languages {
+                ul {
+                    margin-left: -2.5rem;
+
+                    .language {
+                        font-size: 1.1rem;
+                        font-weight: 600;
+                    }
+    
+                    .langauge-level {
+                        font-size: 1.1rem;
+                        font-weight: 400;
+                    }
+                }
+            }
+
+            .projects {
+                ul {
+                    margin-left: -2.5rem;
+
+                    .project-name {
+                        color: #6114ed;
+                        font-size: 1.25rem;
+                        @include gradient-text-color()
+                    }
+
+                    .section-description {
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+    }
+}

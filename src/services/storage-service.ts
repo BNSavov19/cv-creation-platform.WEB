@@ -1,5 +1,6 @@
 import {
-    LOCAL_STORAGE_TOKEN_KEY
+    LOCAL_STORAGE_TOKEN_KEY,
+    LOCAL_STORAGE_USER_ID_KEY
 } from '@/shared/constants'
 
 class StorageService {
@@ -24,9 +25,33 @@ class StorageService {
         }
     }
 
+    public retrieveUserId(): string | null {
+      try {
+          const uid = localStorage.getItem(LOCAL_STORAGE_USER_ID_KEY);
+          if (!uid) {
+            return null;
+          }
+          return uid;
+        } catch (e) {
+          localStorage.removeItem(LOCAL_STORAGE_USER_ID_KEY);
+          return null;
+        }
+  } 
+
+    public saveUserId(uid: string | null): void {
+      if (uid) {
+        localStorage.setItem(LOCAL_STORAGE_USER_ID_KEY, uid);
+      } else {
+        localStorage.removeItem(LOCAL_STORAGE_USER_ID_KEY);
+      }
+    }
+
+
+
     public checkForUserLogin(): boolean {
         const token = this.retrieveToken();
-        if (token) {
+        const uid = this.retrieveUserId()
+        if (token && uid) {
             return true;
         }
         return false;

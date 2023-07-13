@@ -4,8 +4,8 @@ import RegisterPage from '@/views/RegisterPage.vue'
 import Landing from '@/views/Landing.vue'
 import Dashboard from '@/views/Dashboard.vue'
 import Template1 from '@/components/cv-templates/Template1.vue'
-import Template2 from '@/components/cv-templates/Template2.vue'
-import Template3 from '@/components/cv-templates/Template3.vue'
+import ResumeEditor from '@/views/ResumeEditor.vue'
+import ChooseTemplate from '@/views/ChooseTemplate.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -16,7 +16,7 @@ const router = createRouter({
       component: Landing
     },
     {
-      path: '/dashboard',
+      path: '/resumes',
       name: 'dashboard',
       component: Dashboard
     },
@@ -36,14 +36,14 @@ const router = createRouter({
       component: Template1
     },
     {
-      path: '/template2',
-      name: 'template2',
-      component: Template2
+      path: '/resumes/create/templates',
+      name: 'chooseTemplate',
+      component: ChooseTemplate,
     },
     {
-      path: '/template3',
-      name: 'template3',
-      component: Template3
+      path: '/resumes/:id/editor',
+      name: 'editor',
+      component: ResumeEditor
     },
   ]
 })

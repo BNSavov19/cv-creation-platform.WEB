@@ -11,11 +11,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios, { type AxiosResponse, type AxiosInstance, type AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { type UserDTO } from '../models';
 /**
  * AuthApi - axios parameter creator
  * @export
@@ -71,11 +72,11 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {number} userId 
+         * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiAuthLogoutUserIdGet: async (userId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiAuthLogoutUserIdGet: async (userId: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             if (userId === null || userId === undefined) {
                 throw new RequiredError('userId','Required parameter userId was null or undefined when calling apiAuthLogoutUserIdGet.');
@@ -174,7 +175,7 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiAuthRenewTokenPost: async (refreshToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiAuthRenewTokenPostForm: async (refreshToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/Auth/renew-token`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -185,11 +186,14 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
-            if (refreshToken !== undefined) {
-                localVarQueryParameter['refreshToken'] = refreshToken;
+
+            if (refreshToken !== undefined) { 
+                localVarFormParams.append('refreshToken', refreshToken as any);
             }
 
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -200,53 +204,7 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        apiAuthUserIdGet: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling apiAuthUserIdGet.');
-            }
-            const localVarPath = `/api/Auth/user/{id}`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication oauth2 required
-            if (configuration && configuration.apiKey) {
-                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
-                    ? await configuration.apiKey("Authorization")
-                    : await configuration.apiKey;
-                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
-            }
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -269,7 +227,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiAuthLoginPostForm(username?: string, password?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiAuthLoginPostForm(username?: string, password?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserDTO>>> {
             const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).apiAuthLoginPostForm(username, password, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -278,11 +236,11 @@ export const AuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {number} userId 
+         * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiAuthLogoutUserIdGet(userId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiAuthLogoutUserIdGet(userId: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
             const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).apiAuthLogoutUserIdGet(userId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -310,21 +268,8 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiAuthRenewTokenPost(refreshToken?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).apiAuthRenewTokenPost(refreshToken, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async apiAuthUserIdGet(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).apiAuthUserIdGet(id, options);
+        async apiAuthRenewTokenPostForm(refreshToken?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await AuthApiAxiosParamCreator(configuration).apiAuthRenewTokenPostForm(refreshToken, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -346,16 +291,16 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiAuthLoginPostForm(username?: string, password?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiAuthLoginPostForm(username?: string, password?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<UserDTO>> {
             return AuthApiFp(configuration).apiAuthLoginPostForm(username, password, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {number} userId 
+         * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiAuthLogoutUserIdGet(userId: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiAuthLogoutUserIdGet(userId: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
             return AuthApiFp(configuration).apiAuthLogoutUserIdGet(userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -375,17 +320,8 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiAuthRenewTokenPost(refreshToken?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return AuthApiFp(configuration).apiAuthRenewTokenPost(refreshToken, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async apiAuthUserIdGet(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return AuthApiFp(configuration).apiAuthUserIdGet(id, options).then((request) => request(axios, basePath));
+        async apiAuthRenewTokenPostForm(refreshToken?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return AuthApiFp(configuration).apiAuthRenewTokenPostForm(refreshToken, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -405,17 +341,17 @@ export class AuthApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public async apiAuthLoginPostForm(username?: string, password?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiAuthLoginPostForm(username?: string, password?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserDTO>> {
         return AuthApiFp(this.configuration).apiAuthLoginPostForm(username, password, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
-     * @param {number} userId 
+     * @param {string} userId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public async apiAuthLogoutUserIdGet(userId: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiAuthLogoutUserIdGet(userId: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return AuthApiFp(this.configuration).apiAuthLogoutUserIdGet(userId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -437,17 +373,7 @@ export class AuthApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public async apiAuthRenewTokenPost(refreshToken?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return AuthApiFp(this.configuration).apiAuthRenewTokenPost(refreshToken, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthApi
-     */
-    public async apiAuthUserIdGet(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return AuthApiFp(this.configuration).apiAuthUserIdGet(id, options).then((request) => request(this.axios, this.basePath));
+    public async apiAuthRenewTokenPostForm(refreshToken?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return AuthApiFp(this.configuration).apiAuthRenewTokenPostForm(refreshToken, options).then((request) => request(this.axios, this.basePath));
     }
 }

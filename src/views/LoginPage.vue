@@ -33,7 +33,11 @@ onMounted(()=>{
 function onLoginAttempt(form: any)
 {
     authService.makeLoginRequest(form.username, form.password).then((res) => {
-        storageService.saveToken(res.data as unknown as string);
+        if(res.data.jwt && res.data.id)
+        {
+            storageService.saveToken(res.data.jwt);
+            storageService.saveUserId(res.data.id);
+        }
         if(storageService.checkForUserLogin()) router.push({name:'dashboard'});
     }).catch((error) => {
         console.log(error);
