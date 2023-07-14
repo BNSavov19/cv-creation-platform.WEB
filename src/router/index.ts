@@ -16,7 +16,7 @@ const router = createRouter({
       component: Landing
     },
     {
-      path: '/resumes',
+      path: '/dashboard',
       name: 'dashboard',
       component: Dashboard
     },

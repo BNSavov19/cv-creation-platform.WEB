@@ -60,10 +60,10 @@ function onCreateCVButtonClick()
             padding: 3rem;
             border-radius: 3rem;
             box-shadow: 0px 0px 106px 16px rgba(41,130,254,0.2);
-            margin-left: 5rem;
+            margin: 0 5rem;
             
             .landing-title {
-                font-size: 4rem;
+                font-size: 3.5rem;
                 max-width: 50rem;
                 font-weight: 600;
                 line-height: 1.3;
@@ -82,7 +82,7 @@ function onCreateCVButtonClick()
                 outline: none;
                 border: none;
                 cursor: pointer;
-                font-size: 1.25rem;
+                font-size: 1.10rem;
                 font-weight: 600;
                 font-family: 'Manrope';
                 font-style: normal;
@@ -101,7 +101,7 @@ function onCreateCVButtonClick()
         .content-wrapper {
             transform: scale(0.765);
             .main-content {
-                margin-left: 0;
+                margin: 0;
                 text-align: center;
                 .landing-title {
                     font-size: 2rem;
