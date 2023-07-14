@@ -20,6 +20,15 @@ export class ResumeService extends WebApiService {
         return await this.resumeApi.apiResumeResumesIdGet(resumeId, this.generateHeader());
     }
 
+    // public async updateResume(resume: ResumeDTO): Promise<AxiosResponse<ResumeDTO>>
+    // {
+    //     return await this.resumeApi.apiResumeResumesIdPutForm('id', resume.userId, resume.title, resume.creationDate, resume.personalInfo?.photoUrl,
+    //     resume.personalInfo?.fullName, resume.personalInfo?.address, resume.personalInfo?.phoneNumber, resume.personalInfo?.email, resume.unknownSection?.title,
+    //     resume.unknownSection?.description, resume.unknownSection?.startDate, resume.unknownSection?.endDate, resume.template?.templateName,
+    //     resume.template?.cssClassName, resume.template?.filePath, resume.certificates, resume.educations, resume.workExperiences, resume.languages,
+    //     resume.skills, this.generateHeader());
+    // }
+
 }
 
 const resumeService = new ResumeService();

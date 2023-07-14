@@ -1,7 +1,8 @@
 <template>
 <div class="editor-wrapper">
     <div class="sidebar-section">
-        sidebar
+        <PersonalDetailsForm :personalInfoData="resume.personalInfo"/>
+        <EmploymentHistorySection :employments="resume.workExperiences" @add:employment="addEmployment"></EmploymentHistorySection>
     </div>
 
     <div class="preview-section" ref="previewSection">
@@ -21,6 +22,8 @@ import { useElementSize, useResizeObserver } from '@vueuse/core'
 import resumeService from '@/services/resume-service'
 import { type ResumeDTO } from '@/api'
 import { useRoute } from 'vue-router';
+import PersonalDetailsForm from '@/components/forms/PersonalDetailsForm.vue';
+import EmploymentHistorySection from '@/components/misc/EmploymentHistorySection.vue';
 
 const route = useRoute();
 let resume: Ref<ResumeDTO> = ref({});
@@ -46,6 +49,11 @@ onMounted(async ()=>{
     })
 })
 
+function addEmployment() {
+    resume.value.workExperiences?.push({});
+    
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -55,9 +63,11 @@ onMounted(async ()=>{
     flex-direction: row;
 
     .sidebar-section {
-        min-width: 960px;
-        height: 100%;
+        width: 50%;
+        height: fit-content;
         background: white;
+        box-sizing: border-box;
+        padding: 48px;
     }
 
     .preview-section {
@@ -77,7 +87,8 @@ onMounted(async ()=>{
         color: rgb(255, 255, 255);
         user-select: none;
         z-index: 0;
-        padding: 2rem;
+        box-sizing: border-box;
+        padding: 1rem;
 
         .resume-preview {
             transform: scale(v-bind(resumePreviewScale))

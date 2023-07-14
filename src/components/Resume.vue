@@ -32,9 +32,9 @@
                 <h1 class="section-title">Experience</h1>
                 <div class="section-data">
                     <div v-for="workExperience in props.resumeData.workExperiences" class="work-experience">
-                        <h1 class="title">{{workExperience.position}}, {{ workExperience.companyName }}</h1>
-                        <span class="duration">{{workExperience.startDate}} - {{workExperience.endDate}}</span>
-                        <p class="description">{{workExperience.description}}</p>
+                        <h1 class="title" v-if="workExperience.position">{{workExperience.position}}, {{ workExperience.companyName }}</h1>
+                        <span class="duration" v-if="workExperience.startDate && workExperience.endDate">{{workExperience.startDate}} - {{workExperience.endDate}}</span>
+                        <p class="description" v-if="workExperience.description">{{workExperience.description}}</p>
                     </div>
                 </div>
             </div>
