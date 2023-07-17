@@ -13,7 +13,7 @@
 
             <div class="title">
                 <!-- <h1>{{props.resumeData.personalInfo?.fullName}}</h1> -->
-                <span>{{props.resumeData.title}}</span>
+                <span>{{props.resumeData.personalInfo?.firstName}} {{props.resumeData.personalInfo?.lastName}}</span>
             </div>
 
 

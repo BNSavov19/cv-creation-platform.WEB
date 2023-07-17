@@ -11,9 +11,9 @@ export class ResumeService extends WebApiService {
 
     resumeApi: ResumeApi;
 
-     public async getAllResumes(userId: string): Promise<AxiosResponse<Array<ResumeDTO>, any>> {
-       return await this.resumeApi.apiResumeUserResumesUserIdGet(userId, this.generateHeader());
-     }
+    public async getAllResumes(userId: string): Promise<AxiosResponse<Array<ResumeDTO>, any>> {
+        return await this.resumeApi.apiResumeUserResumesUserIdGet(userId, this.generateHeader());
+    }
 
     public async getResumeById(resumeId: string):  Promise<AxiosResponse<ResumeDTO>>
     {

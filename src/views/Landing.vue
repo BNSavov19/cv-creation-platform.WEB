@@ -30,13 +30,13 @@ import storageService from '@/services/storage-service';
 import { onMounted } from 'vue';
 
 onMounted(()=>{
-    if(storageService.checkForUserLogin()) router.push({name:'dashboard'});
+    if(storageService.checkForUserLogin()) router.push({name:'resumes'});
 })
 
 function onCreateCVButtonClick()
 {
     if(storageService.checkForUserLogin()) {
-        router.push({name:'dashboard'});
+        router.push({name:'resumes'});
     }
     else {
         router.push({name:'login'});

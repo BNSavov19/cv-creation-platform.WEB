@@ -23,16 +23,4 @@ export interface TemplateDTO {
      * @memberof TemplateDTO
      */
     templateName?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TemplateDTO
-     */
-    cssClassName?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof TemplateDTO
-     */
-    filePath?: string | null;
 }

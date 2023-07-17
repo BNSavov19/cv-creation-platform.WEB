@@ -1,22 +1,24 @@
 <template>
-    <h1 class="heading">Employment History</h1>
-    <EmploymentHistoryForm v-for="workExperience in props.employments" :workExperienceData="workExperience"></EmploymentHistoryForm>
-    <div class="add-employment-button" @click="addEmployment">+ Add employment</div>
+    <h1 class="heading">Education</h1>
+    <EducationForm v-for="education in props.educations" :educationData="education"/>
+    <div class="add-education-button" @click="addEducation">+ Add education</div>
 </template>
 
 <script lang="ts" setup>
 import { type Ref, ref } from 'vue';
 import EmploymentHistoryForm from '../forms/EmploymentHistoryForm.vue'
 import { type WorkExperienceDTO } from '../../api/models/work-experience-dto'
+import EducationForm from '../forms/EducationForm.vue';
+import type { EducationDTO } from '@/api';
 
 const props = defineProps<{
-    employments?: Array<WorkExperienceDTO> | null | undefined
+    educations?: Array<EducationDTO> | null | undefined
 }>();
 
-const emits = defineEmits(['add:employment'])
+const emits = defineEmits(['add:education'])
 
-function addEmployment() {
-    emits('add:employment');
+function addEducation() {
+    emits('add:education');
 }
 </script>
 
@@ -31,7 +33,7 @@ function addEmployment() {
     margin-bottom: 1rem; 
 }
 
-.add-employment-button {
+.add-education-button {
     color: rgb(26, 145, 240);
     font-weight: 600;
     cursor: pointer;

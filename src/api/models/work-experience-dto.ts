@@ -46,5 +46,11 @@ export interface WorkExperienceDTO {
      * @type {string}
      * @memberof WorkExperienceDTO
      */
+    location?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkExperienceDTO
+     */
     description?: string | null;
 }

@@ -19,6 +19,12 @@
 export interface PersonalInfoDTO {
     /**
      * 
+     * @type {Blob}
+     * @memberof PersonalInfoDTO
+     */
+    photo?: Blob | null;
+    /**
+     * 
      * @type {string}
      * @memberof PersonalInfoDTO
      */
@@ -28,7 +34,25 @@ export interface PersonalInfoDTO {
      * @type {string}
      * @memberof PersonalInfoDTO
      */
-    fullName?: string | null;
+    firstName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PersonalInfoDTO
+     */
+    middleName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PersonalInfoDTO
+     */
+    lastName?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof PersonalInfoDTO
+     */
+    description?: string | null;
     /**
      * 
      * @type {string}

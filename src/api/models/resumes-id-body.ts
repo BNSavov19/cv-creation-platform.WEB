@@ -27,6 +27,12 @@ export interface ResumesIdBody {
      * @type {string}
      * @memberof ResumesIdBody
      */
+    id?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResumesIdBody
+     */
     userId?: string;
     /**
      * 
@@ -42,6 +48,12 @@ export interface ResumesIdBody {
     creationDate?: Date;
     /**
      * 
+     * @type {Blob}
+     * @memberof ResumesIdBody
+     */
+    personalInfoPhoto?: Blob;
+    /**
+     * 
      * @type {string}
      * @memberof ResumesIdBody
      */
@@ -51,7 +63,25 @@ export interface ResumesIdBody {
      * @type {string}
      * @memberof ResumesIdBody
      */
-    personalInfoFullName?: string;
+    personalInfoFirstName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResumesIdBody
+     */
+    personalInfoMiddleName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResumesIdBody
+     */
+    personalInfoLastName?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResumesIdBody
+     */
+    personalInfoDescription?: string;
     /**
      * 
      * @type {string}
@@ -100,18 +130,6 @@ export interface ResumesIdBody {
      * @memberof ResumesIdBody
      */
     templateTemplateName?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResumesIdBody
-     */
-    templateCssClassName?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResumesIdBody
-     */
-    templateFilePath?: string;
     /**
      * 
      * @type {Array<CertificateDTO>}

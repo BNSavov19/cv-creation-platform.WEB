@@ -42,6 +42,11 @@
             position: absolute;
             left: 2rem;
             top: 2rem;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
         }
 
         .details {

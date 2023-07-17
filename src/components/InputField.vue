@@ -2,15 +2,17 @@
     <div class="input-container">
         <label :for="props.name">{{props.title}}</label>
         <input
-            :value="props.modelValue"
+            :value="props.vModel"
             :type="props.type"
             :name="props.name"
-            v-model="props.vModel">
+            @input="debouncedOnInput">
             
     </div>
 </template>
 
 <script lang="ts" setup>
+import { ref, nextTick } from 'vue';
+
 
 const props = defineProps<{
     title?: string,
@@ -19,7 +21,37 @@ const props = defineProps<{
     type?: string,
     vModel?: any,
     name?: string,
-}>()
+    updateCallback?: (value: string)=> void;
+}>();
+const renderComponent = ref(true);
+
+const emits = defineEmits(["update:value"]);
+
+function onInput(event: Event) {
+  update(event);
+}
+
+function update(event: Event): void {
+}
+
+const debounce = (callback: any, wait: number) => {
+  let timeoutId: any = null;
+  return (...args: any) => {
+    window.clearTimeout(timeoutId);
+    timeoutId = window.setTimeout(() => {
+      callback.apply(null, args);
+    }, wait);
+  };
+}
+
+const debouncedOnInput = debounce((event: any) => {
+  const target = event.target as HTMLInputElement;
+  if(props.updateCallback && target.value) {
+    props.updateCallback(target.value);
+    emits('update:value', target.value);
+  }
+}, 1000);
+
 </script>
 
 <style lang="scss" scoped>

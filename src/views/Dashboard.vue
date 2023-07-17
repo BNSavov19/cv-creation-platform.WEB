@@ -15,14 +15,14 @@
 
                 <div class="navigation-tab">
                     <div class="navigation-buttons">
-                        <button class="resumes-button" @click="activeComponent = Resumes">Resumes</button>
-                        <button class="your-data-button" @click="activeComponent = PersonalDetailsForm">Your data</button>
+                        <button class="resumes-button">Resumes</button>
+                        <button class="your-data-button">Your data</button>
                     </div>
                 </div>
             </div>
 
             <div class="main-content">
-                <component :is="activeComponent"></component>
+                <Resumes :resumes="resumes"></Resumes>
             </div>
         </div>
 
@@ -32,14 +32,23 @@
 <script lang="ts" setup> 
 import router from '@/router';
 import storageService from '@/services/storage-service';
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, type Ref } from 'vue';
 import Resumes from './Resumes.vue';
 import PersonalDetailsForm from '../components/forms/PersonalDetailsForm.vue'
+import type { ResumeDTO } from '@/api';
+import resumeService from '@/services/resume-service';
 
 const activeComponent = ref(Resumes);
 
-onMounted(()=>{
+const resumes: Ref<ResumeDTO[]> = ref([]);
+
+onMounted(async ()=>{
     if(!storageService.checkForUserLogin()) router.push({name:'login'});
+
+    resumeService.getAllResumes(storageService.retrieveUserId()!).then((res)=>{
+        resumes.value = res.data;
+        console.log(resumes.value);
+    });
 })
 
 </script>
@@ -48,10 +57,8 @@ onMounted(()=>{
 @import '../styles/imports.scss';
 
 .site-wrapper {
-    margin: -0.4rem;
     display: flex;
     flex-direction: column;
-    min-height: 99vh;
     
     * {
         font-family: 'Manrope', sans-serif;
@@ -119,7 +126,7 @@ onMounted(()=>{
             flex-grow: 1;
             max-height: 76.5rem;
             overflow-y: auto;
-            padding: 3rem 3rem 0 5rem;
+            padding: 2rem
         }
     }
 }

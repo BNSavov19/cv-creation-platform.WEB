@@ -5,78 +5,90 @@
             :vModel="form.FirstName"
             :type="'text'"
             :name="'FirstName'"
-            :title="'First Name'"/>
+            :title="'First Name'"
+            :updateCallback="(value: string)=>{form.FirstName = value}"
+            @update:value="onUpdateValue"/>
 
         <InputField 
             :vModel="form.LastName"
             :type="'text'"
             :name="'LastName'"
-            :title="'Last Name'"/>
+            :title="'Last Name'"
+            :updateCallback="(value: string)=>{form.LastName = value}"
+            @update:value="onUpdateValue"/>
 
         <InputField 
             :vModel="form.Email"
             :type="'email'"
             :name="'Email'"
-            :title="'Email'"/>
+            :title="'Email'"
+            :updateCallback="(value: string)=>{form.Email = value}"
+            @update:value="onUpdateValue"/>
 
         <InputField 
             :vModel="form.Phone"
             :type="'text'"
             :name="'Phone'"
-            :title="'Phone'"/>
+            :title="'Phone'"
+            :updateCallback="(value: string)=>{form.Phone = value}"
+            @update:value="onUpdateValue"/>
 
         <InputField 
             :vModel="form.Country"
             :type="'text'"
             :name="'Country'"
-            :title="'Country'"/>
+            :title="'Country'"
+            :updateCallback="(value: string)=>{form.Country = value}"
+            @update:value="onUpdateValue"/>
 
         <InputField 
             :vModel="form.City"
             :type="'text'"
             :name="'City'"
-            :title="'City'"/>
+            :title="'City'"
+            :updateCallback="(value: string)=>{form.City = value}"
+            @update:value="onUpdateValue"/>
 
         <InputField 
             :vModel="form.Address"
             :type="'text'"
             :name="'Address'"
-            :title="'Address'"/>
+            :title="'Address'"
+            :updateCallback="(value: string)=>{form.Address = value}"
+            @update:value="onUpdateValue"/>
         
     </div>
 </template>
 
 <script lang="ts" setup>
 import InputField from '../InputField.vue';
-import { ref, type Ref } from 'vue';
+import { onUpdated, ref, type Ref } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers} from '@vuelidate/validators'
 import type { PersonalInfoDTO } from '@/api';
 
 const props = defineProps<{
-    personalInfoData?: PersonalInfoDTO
+    personalInfoData: PersonalInfoDTO | undefined | null,
 }>()
 
+const emits = defineEmits(['value:updated']);
+
 let form = ref({
-    FirstName: ' ',
-    LastName: '',
-    Email: '',
-    Phone: '',
+    FirstName: props.personalInfoData?.firstName,
+    LastName: props.personalInfoData?.lastName,
+    Email: props.personalInfoData?.email,
+    Phone: props.personalInfoData?.phoneNumber,
     Country: '',
     City: '',
-    Address: '',
+    Address: props.personalInfoData?.address,
 });
 
-console.log(props.personalInfoData);
 
-const rules = {
-    username: {
-        required: helpers.withMessage('Please enter a username.', required)
-    },
-    password: {
-        required: helpers.withMessage('Please enter a password.', required)
-    }
+function onUpdateValue()
+{
+    emits('value:updated', form.value);
 }
+
 </script>
 
 <style lang="scss" scoped>
@@ -92,8 +104,5 @@ h1 {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-
-    margin-bottom: 3rem;
-
 }
 </style>

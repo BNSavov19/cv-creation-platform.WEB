@@ -1,8 +1,18 @@
 <template>
 <div class="editor-wrapper">
     <div class="sidebar-section">
-        <PersonalDetailsForm :personalInfoData="resume.personalInfo"/>
-        <EmploymentHistorySection :employments="resume.workExperiences" @add:employment="addEmployment"></EmploymentHistorySection>
+        <div class="form-section">
+            <PersonalDetailsForm  v-if="resume.personalInfo" :personalInfoData="resume.personalInfo" @value:updated="onPersonalInfoUpdated"/>
+        </div>
+        <div class="form-section">
+            <EmploymentHistorySection :employments="resume.workExperiences" @add:employment="addEmployment" />
+        </div>
+        <div class="form-section">
+            <EducationSection :educations="resume.educations" @add:education="addEducation"/>
+        </div>
+        <div class="form-section">
+            <SkillsSection :skills="resume.skills"/>
+        </div>
     </div>
 
     <div class="preview-section" ref="previewSection">
@@ -20,10 +30,12 @@ import Resume from '@/components/Resume.vue';
 import { onMounted, ref, type Ref } from 'vue'
 import { useElementSize, useResizeObserver } from '@vueuse/core'
 import resumeService from '@/services/resume-service'
-import { type ResumeDTO } from '@/api'
+import { type PersonalInfoDTO, type ResumeDTO } from '@/api'
 import { useRoute } from 'vue-router';
 import PersonalDetailsForm from '@/components/forms/PersonalDetailsForm.vue';
 import EmploymentHistorySection from '@/components/misc/EmploymentHistorySection.vue';
+import EducationSection from '@/components/misc/EducationSection.vue';
+import SkillsSection from '@/components/misc/SkillsSection.vue';
 
 const route = useRoute();
 let resume: Ref<ResumeDTO> = ref({});
@@ -37,7 +49,7 @@ onMounted(async ()=>{
 
     if(!storageService.checkForUserLogin()) router.push({name:'login'});
 
-   resumeService.getResumeById(route.params.id as string).then((res)=>{
+    resumeService.getResumeById(route.params.id as string).then((res)=>{
         resume.value = res.data;
    });
 
@@ -51,8 +63,25 @@ onMounted(async ()=>{
 
 function addEmployment() {
     resume.value.workExperiences?.push({});
-    
 }
+
+function addEducation() {
+    resume.value.educations?.push({});
+}
+
+function onPersonalInfoUpdated(personalInfo: any) {
+
+    if(resume.value.personalInfo) {
+        resume.value.personalInfo.firstName = personalInfo.FirstName;
+        resume.value.personalInfo.lastName = personalInfo.LastName;
+        resume.value.personalInfo.address = personalInfo.Address;
+        resume.value.personalInfo.description = personalInfo.Description;
+        resume.value.personalInfo.email = personalInfo.Email;
+        resume.value.personalInfo.phoneNumber = personalInfo.Phone;
+    }
+
+
+} 
 
 </script>
 
@@ -68,6 +97,10 @@ function addEmployment() {
         background: white;
         box-sizing: border-box;
         padding: 48px;
+
+        .form-section {
+            margin-bottom: 3rem;
+        }
     }
 
     .preview-section {

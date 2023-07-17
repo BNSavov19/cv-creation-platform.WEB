@@ -11,20 +11,26 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { type CertificateDTO } from './certificate-dto';
-import { type EducationDTO } from './education-dto';
-import { type LanguageDTO } from './language-dto';
-import { type PersonalInfoDTO } from './personal-info-dto';
-import { type SkillsDTO } from './skills-dto';
-import { type TemplateDTO } from './template-dto';
-import { type UnknownSectionDTO } from './unknown-section-dto';
-import { type WorkExperienceDTO } from './work-experience-dto';
+import { CertificateDTO } from './certificate-dto';
+import { EducationDTO } from './education-dto';
+import { LanguageDTO } from './language-dto';
+import { PersonalInfoDTO } from './personal-info-dto';
+import { SkillsDTO } from './skills-dto';
+import { TemplateDTO } from './template-dto';
+import { UnknownSectionDTO } from './unknown-section-dto';
+import { WorkExperienceDTO } from './work-experience-dto';
 /**
  * 
  * @export
  * @interface ResumeDTO
  */
 export interface ResumeDTO {
+    /**
+     * 
+     * @type {string}
+     * @memberof ResumeDTO
+     */
+    id?: string | null;
     /**
      * 
      * @type {string}

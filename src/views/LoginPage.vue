@@ -27,7 +27,7 @@ import storageService from '@/services/storage-service';
 import { onMounted } from 'vue';
 
 onMounted(()=>{
-    if(storageService.checkForUserLogin()) router.push({name:'dashboard'});
+    if(storageService.checkForUserLogin()) router.push({name:'resumes'});
 })
 
 function onLoginAttempt(form: any)
@@ -38,7 +38,7 @@ function onLoginAttempt(form: any)
             storageService.saveToken(res.data.jwt);
             storageService.saveUserId(res.data.id);
         }
-        if(storageService.checkForUserLogin()) router.push({name:'dashboard'});
+        if(storageService.checkForUserLogin()) router.push({name:'resumes'});
     }).catch((error) => {
         console.log(error);
     });
