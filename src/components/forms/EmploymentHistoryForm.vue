@@ -4,45 +4,65 @@
             <span v-if="props.workExperienceData.position || props.workExperienceData.companyName">{{props.workExperienceData.position}} <span v-if="props.workExperienceData.companyName">at {{props.workExperienceData.companyName}}</span> </span>
             <span v-else>(Not specified)</span>
 
-            <IconArrowDown v-if="active" class="arrow"/>
+            <IconArrowDown v-if="active == false" class="arrow"/>
             <IconArrowUp v-else class="arrow"/>
         </div>
         <div v-if="active" class="employment-history-form">
-            <InputField 
-                :vModel="form.JobTitle"
+            <div class="grid-container">
+                <InputField 
+                    :vModel="form.position"
+                    :type="'text'"
+                    :name="'JobTitle'"
+                    :title="'Job title'"
+                    :updateCallback="(value: string)=>{form.position = value}"
+                    @update:value="onUpdateValue" />
+        
+                <InputField 
+                    :vModel="form.companyName"
+                    :type="'text'"
+                    :name="'Employer'"
+                    :title="'Employer'"
+                    :updateCallback="(value: string)=>{form.companyName = value}"
+                    @update:value="onUpdateValue" />
+    
+                <div class="dates-container">
+                    <InputField 
+                        :vModel="form.startDate"
+                        :type="'date'"
+                        :name="'StartDate'"
+                        :title="'Start Date'"
+                        class="start-date"
+                        :updateCallback="(value: Date)=>{form.startDate = value}"
+                        @update:value="onUpdateValue" />
+            
+                    <InputField 
+                        :vModel="form.endDate"
+                        :type="'date'"
+                        :name="'EndDate'"
+                        :title="'End Date'"
+                        class="end-date"
+                        :updateCallback="(value: Date)=>{form.endDate = value}"
+                        @update:value="onUpdateValue" />
+                </div>
+        
+        
+                <InputField 
+                    :vModel="form.City"
+                    :type="'text'"
+                    :name="'City'"
+                    :title="'City'"
+                    :updateCallback="(value: string)=>{form.City = value}"
+                    @update:value="onUpdateValue" />
+            </div>
+    
+            <TextAreaField 
+                :vModel="form.description"
                 :type="'text'"
-                :name="'JobTitle'"
-                :title="'Job title'"/>
-    
-            <InputField 
-                :vModel="form.Employer"
-                :type="'text'"
-                :name="'Employer'"
-                :title="'Employer'"/>
-    
-            <InputField 
-                :vModel="form.StartDate"
-                :type="'date'"
-                :name="'StartDate'"
-                :title="'Start Date'"/>
-    
-            <InputField 
-                :vModel="form.EndDate"
-                :type="'date'"
-                :name="'EndDate'"
-                :title="'End Date'"/>
-    
-            <InputField 
-                :vModel="form.City"
-                :type="'text'"
-                :name="'City'"
-                :title="'City'"/>
-    
-            <InputField 
-                :vModel="form.Description"
-                :type="'area'"
                 :name="'Description'"
-                :title="'Description'"/>
+                :title="'Description'"
+                class="description"
+                :updateCallback="(value: string)=>{form.description = value}"
+                @update:value="onUpdateValue" />
         </div>
     </div>
 </template>
@@ -52,24 +72,32 @@ import InputField from '../InputField.vue';
 import { ref, type Ref } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers} from '@vuelidate/validators'
-import type { WorkExperienceDTO } from '@/api';
+import type { WorkExperienceVM } from '@/api';
 import IconArrowDown from '../icons/IconArrowDown.vue';
 import IconArrowUp from '../icons/IconArrowUp.vue';
+import TextAreaField from '../TextAreaField.vue';
 
 const props = defineProps<{
-    workExperienceData: WorkExperienceDTO,
-}>()
+    workExperienceData: WorkExperienceVM,
+}>();
+
+const emits = defineEmits(['updated:value']);
 
 const active: Ref<boolean> = ref(false);
 
 let form = ref({
-    JobTitle: props.workExperienceData.position,
-    Employer: props.workExperienceData.companyName,
-    StartDate: props.workExperienceData.startDate,
-    EndDate: props.workExperienceData.endDate,
+    position: props.workExperienceData.position,
+    companyName: props.workExperienceData.companyName,
+    startDate: props.workExperienceData.startDate,
+    endDate: props.workExperienceData.endDate,
     City: '',
-    Description: props.workExperienceData.description,
+    description: props.workExperienceData.description,
 });
+
+function onUpdateValue()
+{
+    emits('updated:value', props.workExperienceData.id, form.value);
+}
 
 </script>
 
@@ -110,8 +138,41 @@ h1 {
     
     .employment-history-form {
         width: 100%;
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            column-gap: 3rem;
+            .dates-container {
+                box-sizing: border-box;
+                width: 100%;
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+    
+                .start-date {
+                    margin-right: 8px;
+                    
+                    .input-container {
+                        .input-wrapper {
+                            flex: 1 1 0%;
+                            display: flex;
+                            align-items: flex-end;
+                        }
+                    }
+                }
+    
+                .end-date {
+                    .input-container {
+                        .input-wrapper {
+                            flex: 1 1 0%;
+                            display: flex;
+                            align-items: flex-end;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     &:hover {

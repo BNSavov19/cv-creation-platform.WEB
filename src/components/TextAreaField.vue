@@ -2,11 +2,10 @@
     <div class="input-container">
         <label :for="props.name">{{props.title}}</label>
         <div class="input-wrapper">
-          <input
+          <textarea
               :value="props.vModel"
-              :type="props.type"
               :name="props.name"
-              @input="debouncedOnInput">
+              @input="debouncedOnInput"></textarea>
         </div>
             
     </div>
@@ -20,10 +19,9 @@ const props = defineProps<{
     title?: string,
     value?: string,
     modelValue?: string,
-    type?: string,
     vModel?: any,
     name?: string,
-    updateCallback?: (value: string)=> any;
+    updateCallback?: (value: string)=> void;
 }>();
 const renderComponent = ref(true);
 
@@ -68,7 +66,7 @@ const debouncedOnInput = debounce((event: any) => {
         font-weight: 500;
     }
     .input-wrapper {
-      input {
+    textarea {
           display: flex;
           width: 100%;
           height: 100%;
@@ -84,6 +82,8 @@ const debouncedOnInput = debounce((event: any) => {
           font-family: 'Manrope';
           font-size: 1.1rem;
           font-weight: 500;
+          overflow-wrap: break-word;
+          resize: vertical;
       }
 
     }

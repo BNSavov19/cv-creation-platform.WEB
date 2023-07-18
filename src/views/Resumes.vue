@@ -6,7 +6,7 @@
         </div>
 
         <div class="resumes-grid" ref="previewSection">
-            <div v-for="resume in resumes" class="resume-preview" ref="resumePreview" @click="router.push({name:'editor', params:{id:resume.id}})">
+            <div v-for="resume in resumes" class="resume-preview" ref="resumePreview" @click="onResumeClick(resume.id)">
                 <Resume :resumeData="resume" class="resume"/>
                 <h1 class="resume-title">{{ resume.title }}</h1>
             </div>
@@ -15,14 +15,14 @@
 </template>
 
 <script lang="ts" setup>
-import type { ResumeDTO } from '@/api';
+import type { ResumeVM } from '@/api';
 import Resume from '@/components/Resume.vue';
 import { onMounted, ref, type Ref} from 'vue'
 import { useElementSize, useResizeObserver } from '@vueuse/core'
 import router from '@/router';
 
 const props = defineProps<{
-    resumes: Array<ResumeDTO>,
+    resumes: Array<ResumeVM>,
 }>()
 
 let resumePreviewScale: Ref<number> = ref(0.5);
@@ -39,8 +39,12 @@ onMounted(() => {
         console.log(resumePreviewElement.height.value, resumePreviewElement.width.value);
     })
 
-    console.log(props.resumes);
 })
+
+function onResumeClick(_id: string)
+{
+    router.push({name:'editor', params:{id:_id}})
+}
 
 
 </script>

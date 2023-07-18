@@ -65,10 +65,10 @@ import InputField from '../InputField.vue';
 import { onUpdated, ref, type Ref } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers} from '@vuelidate/validators'
-import type { PersonalInfoDTO } from '@/api';
+import type { PersonalInfoVM } from '@/api';
 
 const props = defineProps<{
-    personalInfoData: PersonalInfoDTO | undefined | null,
+    personalInfoData: PersonalInfoVM | undefined | null,
 }>()
 
 const emits = defineEmits(['value:updated']);
@@ -104,5 +104,6 @@ h1 {
     width: 100%;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 3rem;
 }
 </style>

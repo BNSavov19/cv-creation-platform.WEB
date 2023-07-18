@@ -15,8 +15,6 @@
                 <!-- <h1>{{props.resumeData.personalInfo?.fullName}}</h1> -->
                 <span>{{props.resumeData.personalInfo?.firstName}} {{props.resumeData.personalInfo?.lastName}}</span>
             </div>
-
-
         </div>
         
         <div class="sections-wrapper">
@@ -72,12 +70,12 @@
 </template>
 
 <script lang="ts" setup> 
-import { type ResumeDTO } from '@/api';
+import { type ResumeVM } from '@/api';
 import resumeService from '@/services/resume-service';
 import { onMounted, onUpdated } from 'vue';
 
 const props = defineProps<{
-    resumeData: ResumeDTO,
+    resumeData: ResumeVM,
 }>()
 
 </script>

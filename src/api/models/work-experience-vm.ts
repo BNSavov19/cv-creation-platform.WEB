@@ -14,37 +14,49 @@
 /**
  * 
  * @export
- * @interface EducationDTO
+ * @interface WorkExperienceVM
  */
-export interface EducationDTO {
+export interface WorkExperienceVM {
+    /**
+     * 
+     * @type {number}
+     * @memberof WorkExperienceVM
+     */
+    id?: number;
     /**
      * 
      * @type {string}
-     * @memberof EducationDTO
+     * @memberof WorkExperienceVM
      */
-    instituteName?: string | null;
+    companyName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof EducationDTO
+     * @memberof WorkExperienceVM
      */
-    degree?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof EducationDTO
-     */
-    fieldOfStudy?: string | null;
+    position?: string | null;
     /**
      * 
      * @type {Date}
-     * @memberof EducationDTO
+     * @memberof WorkExperienceVM
      */
     startDate?: Date | null;
     /**
      * 
      * @type {Date}
-     * @memberof EducationDTO
+     * @memberof WorkExperienceVM
      */
     endDate?: Date | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkExperienceVM
+     */
+    location?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof WorkExperienceVM
+     */
+    description?: string | null;
 }

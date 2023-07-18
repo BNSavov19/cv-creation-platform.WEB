@@ -14,13 +14,19 @@
 /**
  * 
  * @export
- * @interface SkillsDTO
+ * @interface SkillVM
  */
-export interface SkillsDTO {
+export interface SkillVM {
+    /**
+     * 
+     * @type {number}
+     * @memberof SkillVM
+     */
+    id?: number;
     /**
      * 
      * @type {string}
-     * @memberof SkillsDTO
+     * @memberof SkillVM
      */
     skillName?: string | null;
 }

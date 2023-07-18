@@ -14,13 +14,19 @@
 /**
  * 
  * @export
- * @interface TemplateDTO
+ * @interface TemplateVM
  */
-export interface TemplateDTO {
+export interface TemplateVM {
+    /**
+     * 
+     * @type {number}
+     * @memberof TemplateVM
+     */
+    id?: number;
     /**
      * 
      * @type {string}
-     * @memberof TemplateDTO
+     * @memberof TemplateVM
      */
     templateName?: string | null;
 }

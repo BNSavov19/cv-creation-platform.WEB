@@ -14,43 +14,43 @@
 /**
  * 
  * @export
- * @interface WorkExperienceDTO
+ * @interface WorkExperiencesWorkExperienceIdBody
  */
-export interface WorkExperienceDTO {
+export interface WorkExperiencesWorkExperienceIdBody {
     /**
      * 
      * @type {string}
-     * @memberof WorkExperienceDTO
+     * @memberof WorkExperiencesWorkExperienceIdBody
      */
-    companyName?: string | null;
+    companyName?: string;
     /**
      * 
      * @type {string}
-     * @memberof WorkExperienceDTO
+     * @memberof WorkExperiencesWorkExperienceIdBody
      */
-    position?: string | null;
+    position?: string;
     /**
      * 
      * @type {Date}
-     * @memberof WorkExperienceDTO
+     * @memberof WorkExperiencesWorkExperienceIdBody
      */
-    startDate?: Date | null;
+    startDate?: Date;
     /**
      * 
      * @type {Date}
-     * @memberof WorkExperienceDTO
+     * @memberof WorkExperiencesWorkExperienceIdBody
      */
-    endDate?: Date | null;
+    endDate?: Date;
     /**
      * 
      * @type {string}
-     * @memberof WorkExperienceDTO
+     * @memberof WorkExperiencesWorkExperienceIdBody
      */
-    location?: string | null;
+    location?: string;
     /**
      * 
      * @type {string}
-     * @memberof WorkExperienceDTO
+     * @memberof WorkExperiencesWorkExperienceIdBody
      */
-    description?: string | null;
+    description?: string;
 }

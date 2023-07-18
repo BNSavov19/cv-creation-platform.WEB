@@ -14,31 +14,25 @@
 /**
  * 
  * @export
- * @interface UnknownSectionDTO
+ * @interface CertificatesResumeIdBody
  */
-export interface UnknownSectionDTO {
+export interface CertificatesResumeIdBody {
     /**
      * 
      * @type {string}
-     * @memberof UnknownSectionDTO
+     * @memberof CertificatesResumeIdBody
      */
-    title?: string | null;
+    certificateName?: string;
     /**
      * 
      * @type {string}
-     * @memberof UnknownSectionDTO
+     * @memberof CertificatesResumeIdBody
      */
-    description?: string | null;
+    issuingOrganization?: string;
     /**
      * 
      * @type {Date}
-     * @memberof UnknownSectionDTO
+     * @memberof CertificatesResumeIdBody
      */
-    startDate?: Date | null;
-    /**
-     * 
-     * @type {Date}
-     * @memberof UnknownSectionDTO
-     */
-    endDate?: Date | null;
+    issueDate?: Date;
 }

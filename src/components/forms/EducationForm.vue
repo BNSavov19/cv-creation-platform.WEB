@@ -9,34 +9,44 @@
         </div>
         <div v-if="active" class="employment-history-form">
             <InputField 
-                :vModel="form.School"
+                :vModel="form.instituteName"
                 :type="'text'"
                 :name="'School'"
-                :title="'School'"/>
+                :title="'School'"
+                :updateCallback="(value: string)=>{form.instituteName = value}"
+                @update:value="onUpdateValue"/>
     
             <InputField 
-                :vModel="form.Degree"
+                :vModel="form.degree"
                 :type="'text'"
                 :name="'Degree'"
-                :title="'Degree'"/>
+                :title="'Degree'"
+                :updateCallback="(value: string)=>{form.degree = value}"
+                @update:value="onUpdateValue"/>
     
             <InputField 
-                :vModel="form.FieldOfStudy"
+                :vModel="form.fieldOfStudy"
                 :type="'text'"
                 :name="'FieldOfStudy'"
-                :title="'FieldOfStudy'"/>
+                :title="'FieldOfStudy'"
+                :updateCallback="(value: string)=>{form.fieldOfStudy = value}"
+                @update:value="onUpdateValue"/>
 
             <InputField 
-                :vModel="form.StartDate"
+                :vModel="form.startDate"
                 :type="'date'"
                 :name="'StartDate'"
-                :title="'Start Date'"/>
+                :title="'Start Date'"
+                :updateCallback="(value: string)=>{form.startDate = value}"
+                @update:value="onUpdateValue"/>
     
             <InputField 
-                :vModel="form.EndDate"
+                :vModel="form.endDate"
                 :type="'date'"
                 :name="'EndDate'"
-                :title="'End Date'"/>
+                :title="'End Date'"
+                :updateCallback="(value: string)=>{form.endDate = value}"
+                @update:value="onUpdateValue"/>
         </div>
     </div>
 </template>
@@ -46,23 +56,30 @@ import InputField from '../InputField.vue';
 import { ref, type Ref } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers} from '@vuelidate/validators'
-import type { EducationDTO, WorkExperienceDTO } from '@/api';
+import type { EducationVM } from '@/api';
 import IconArrowDown from '../icons/IconArrowDown.vue';
 import IconArrowUp from '../icons/IconArrowUp.vue';
 
 const props = defineProps<{
-    educationData: EducationDTO,
-}>()
+    educationData: EducationVM,
+}>();
+
+const emits = defineEmits(['updated:value']);
 
 const active: Ref<boolean> = ref(false);
 
 let form = ref({
-    School: props.educationData.instituteName,
-    Degree: props.educationData.degree,
-    FieldOfStudy: props.educationData.fieldOfStudy,
-    StartDate: props.educationData.startDate,
-    EndDate: props.educationData.endDate,
+    instituteName: props.educationData.instituteName,
+    degree: props.educationData.degree,
+    fieldOfStudy: props.educationData.fieldOfStudy,
+    startDate: props.educationData.startDate,
+    endDate: props.educationData.endDate,
 });
+
+function onUpdateValue()
+{
+    emits('updated:value', props.educationData.id, form.value);
+}
 
 </script>
 
@@ -105,6 +122,7 @@ h1 {
         width: 100%;
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
+        column-gap: 3rem;
     }
 
     &:hover {

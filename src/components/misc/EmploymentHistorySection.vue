@@ -1,22 +1,33 @@
 <template>
     <h1 class="heading">Employment History</h1>
-    <EmploymentHistoryForm v-for="workExperience in props.employments" :workExperienceData="workExperience"></EmploymentHistoryForm>
+    <EmploymentHistoryForm v-for="workExperience in props.employments" :workExperienceData="workExperience" @updated:value="onValueUpdate"></EmploymentHistoryForm>
     <div class="add-employment-button" @click="addEmployment">+ Add employment</div>
 </template>
 
 <script lang="ts" setup>
 import { type Ref, ref } from 'vue';
 import EmploymentHistoryForm from '../forms/EmploymentHistoryForm.vue'
-import { type WorkExperienceDTO } from '../../api/models/work-experience-dto'
+import type { WorkExperienceDTO, WorkExperienceVM } from '@/api';
+import workExperienceService from '@/services/workExperience-service';
 
 const props = defineProps<{
-    employments?: Array<WorkExperienceDTO> | null | undefined
+    employments?: Array<WorkExperienceVM> | null | undefined,
+    resumeId?: string,
+    resumeCreationDate?: Date | undefined,
 }>();
 
-const emits = defineEmits(['add:employment'])
+const emits = defineEmits(["updatedValue"])
 
 function addEmployment() {
-    emits('add:employment');
+    workExperienceService.addWorkExperienceToResume(props.resumeId!, {companyName:'', position: '', startDate: props.resumeCreationDate, endDate: props.resumeCreationDate, location:'', description:''} as WorkExperienceVM).then(()=>{
+        emits('updatedValue');
+    })
+}
+
+function onValueUpdate(id: number, data: any) {
+    workExperienceService.updateWorkExperience(id, data as WorkExperienceVM).then(()=>{
+        emits('updatedValue');
+    })
 }
 </script>
 

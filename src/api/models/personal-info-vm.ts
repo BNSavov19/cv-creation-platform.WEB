@@ -14,61 +14,61 @@
 /**
  * 
  * @export
- * @interface PersonalInfoDTO
+ * @interface PersonalInfoVM
  */
-export interface PersonalInfoDTO {
+export interface PersonalInfoVM {
     /**
      * 
-     * @type {Blob}
-     * @memberof PersonalInfoDTO
+     * @type {number}
+     * @memberof PersonalInfoVM
      */
-    photo?: Blob | null;
+    id?: number;
     /**
      * 
      * @type {string}
-     * @memberof PersonalInfoDTO
+     * @memberof PersonalInfoVM
      */
     photoUrl?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PersonalInfoDTO
+     * @memberof PersonalInfoVM
      */
     firstName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PersonalInfoDTO
+     * @memberof PersonalInfoVM
      */
     middleName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PersonalInfoDTO
+     * @memberof PersonalInfoVM
      */
     lastName?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PersonalInfoDTO
+     * @memberof PersonalInfoVM
      */
     description?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PersonalInfoDTO
+     * @memberof PersonalInfoVM
      */
     address?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PersonalInfoDTO
+     * @memberof PersonalInfoVM
      */
     phoneNumber?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof PersonalInfoDTO
+     * @memberof PersonalInfoVM
      */
     email?: string | null;
 }

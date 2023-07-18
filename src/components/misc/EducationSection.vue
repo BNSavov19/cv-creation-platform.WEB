@@ -1,25 +1,35 @@
 <template>
     <h1 class="heading">Education</h1>
-    <EducationForm v-for="education in props.educations" :educationData="education"/>
+    <EducationForm v-for="education in props.educations" :educationData="education"  @updated:value="onValueUpdate"/>
     <div class="add-education-button" @click="addEducation">+ Add education</div>
 </template>
 
 <script lang="ts" setup>
 import { type Ref, ref } from 'vue';
-import EmploymentHistoryForm from '../forms/EmploymentHistoryForm.vue'
-import { type WorkExperienceDTO } from '../../api/models/work-experience-dto'
 import EducationForm from '../forms/EducationForm.vue';
-import type { EducationDTO } from '@/api';
+import type { EducationVM } from '@/api';
+import educationService from '@/services/education-service';
 
 const props = defineProps<{
-    educations?: Array<EducationDTO> | null | undefined
+    educations?: Array<EducationVM> | null | undefined,
+    resumeId?: string,
+    resumeCreationDate?: Date | undefined,
 }>();
 
-const emits = defineEmits(['add:education'])
+const emits = defineEmits(['value:updated'])
 
 function addEducation() {
-    emits('add:education');
+    educationService.addEducationToResume(props.resumeId!, {instituteName:null, degree: null, fieldOfStudy: null, startDate: props.resumeCreationDate, endDate:  props.resumeCreationDate} as EducationVM).then(()=>{
+        emits('value:updated');
+    })
 }
+
+function onValueUpdate(id: number, data: any) {
+    educationService.updateEducation(id, data as EducationVM).then(()=>{
+        emits('value:updated');
+    })
+}
+
 </script>
 
 <style lang="scss" scoped>

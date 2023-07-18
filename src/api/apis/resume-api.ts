@@ -16,12 +16,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { CertificateDTO } from '../models';
-import { EducationDTO } from '../models';
-import { LanguageDTO } from '../models';
-import { ResumeDTO } from '../models';
-import { SkillsDTO } from '../models';
-import { WorkExperienceDTO } from '../models';
+import { ResumeVM } from '../models';
 /**
  * ResumeApi - axios parameter creator
  * @export
@@ -125,12 +120,10 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {string} id 
-         * @param {string} [id2] 
          * @param {string} [userId] 
          * @param {string} [title] 
          * @param {Date} [creationDate] 
          * @param {Blob} [personalInfoPhoto] 
-         * @param {string} [personalInfoPhotoUrl] 
          * @param {string} [personalInfoFirstName] 
          * @param {string} [personalInfoMiddleName] 
          * @param {string} [personalInfoLastName] 
@@ -143,15 +136,10 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {Date} [unknownSectionStartDate] 
          * @param {Date} [unknownSectionEndDate] 
          * @param {string} [templateTemplateName] 
-         * @param {Array<CertificateDTO>} [certificates] 
-         * @param {Array<EducationDTO>} [educations] 
-         * @param {Array<WorkExperienceDTO>} [workExperiences] 
-         * @param {Array<LanguageDTO>} [languages] 
-         * @param {Array<SkillsDTO>} [skills] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiResumeResumesIdPutForm: async (id: string, id2?: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoPhotoUrl?: string, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, certificates?: Array<CertificateDTO>, educations?: Array<EducationDTO>, workExperiences?: Array<WorkExperienceDTO>, languages?: Array<LanguageDTO>, skills?: Array<SkillsDTO>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiResumeResumesIdPutForm: async (id: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling apiResumeResumesIdPutForm.');
@@ -178,10 +166,6 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
             }
 
 
-            if (id !== undefined) { 
-                localVarFormParams.append('Id', id as any);
-            }
-
             if (userId !== undefined) { 
                 localVarFormParams.append('UserId', userId as any);
             }
@@ -196,10 +180,6 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (personalInfoPhoto !== undefined) { 
                 localVarFormParams.append('PersonalInfo.Photo', personalInfoPhoto as any);
-            }
-
-            if (personalInfoPhotoUrl !== undefined) { 
-                localVarFormParams.append('PersonalInfo.PhotoUrl', personalInfoPhotoUrl as any);
             }
 
             if (personalInfoFirstName !== undefined) { 
@@ -248,31 +228,6 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (templateTemplateName !== undefined) { 
                 localVarFormParams.append('Template.TemplateName', templateTemplateName as any);
-            }
-            if (certificates) {
-                certificates.forEach((element) => {
-                    localVarFormParams.append('Certificates', element as any);
-                })
-            }
-            if (educations) {
-                educations.forEach((element) => {
-                    localVarFormParams.append('Educations', element as any);
-                })
-            }
-            if (workExperiences) {
-                workExperiences.forEach((element) => {
-                    localVarFormParams.append('WorkExperiences', element as any);
-                })
-            }
-            if (languages) {
-                languages.forEach((element) => {
-                    localVarFormParams.append('Languages', element as any);
-                })
-            }
-            if (skills) {
-                skills.forEach((element) => {
-                    localVarFormParams.append('Skills', element as any);
-                })
             }
 
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -295,12 +250,10 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
-         * @param {string} [id] 
          * @param {string} [userId] 
          * @param {string} [title] 
          * @param {Date} [creationDate] 
          * @param {Blob} [personalInfoPhoto] 
-         * @param {string} [personalInfoPhotoUrl] 
          * @param {string} [personalInfoFirstName] 
          * @param {string} [personalInfoMiddleName] 
          * @param {string} [personalInfoLastName] 
@@ -313,15 +266,10 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {Date} [unknownSectionStartDate] 
          * @param {Date} [unknownSectionEndDate] 
          * @param {string} [templateTemplateName] 
-         * @param {Array<CertificateDTO>} [certificates] 
-         * @param {Array<EducationDTO>} [educations] 
-         * @param {Array<WorkExperienceDTO>} [workExperiences] 
-         * @param {Array<LanguageDTO>} [languages] 
-         * @param {Array<SkillsDTO>} [skills] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiResumeResumesPostForm: async (id?: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoPhotoUrl?: string, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, certificates?: Array<CertificateDTO>, educations?: Array<EducationDTO>, workExperiences?: Array<WorkExperienceDTO>, languages?: Array<LanguageDTO>, skills?: Array<SkillsDTO>, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiResumeResumesPostForm: async (userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/Resume/resumes`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -343,10 +291,6 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
             }
 
 
-            if (id !== undefined) { 
-                localVarFormParams.append('Id', id as any);
-            }
-
             if (userId !== undefined) { 
                 localVarFormParams.append('UserId', userId as any);
             }
@@ -361,10 +305,6 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (personalInfoPhoto !== undefined) { 
                 localVarFormParams.append('PersonalInfo.Photo', personalInfoPhoto as any);
-            }
-
-            if (personalInfoPhotoUrl !== undefined) { 
-                localVarFormParams.append('PersonalInfo.PhotoUrl', personalInfoPhotoUrl as any);
             }
 
             if (personalInfoFirstName !== undefined) { 
@@ -413,31 +353,6 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (templateTemplateName !== undefined) { 
                 localVarFormParams.append('Template.TemplateName', templateTemplateName as any);
-            }
-            if (certificates) {
-                certificates.forEach((element) => {
-                    localVarFormParams.append('Certificates', element as any);
-                })
-            }
-            if (educations) {
-                educations.forEach((element) => {
-                    localVarFormParams.append('Educations', element as any);
-                })
-            }
-            if (workExperiences) {
-                workExperiences.forEach((element) => {
-                    localVarFormParams.append('WorkExperiences', element as any);
-                })
-            }
-            if (languages) {
-                languages.forEach((element) => {
-                    localVarFormParams.append('Languages', element as any);
-                })
-            }
-            if (skills) {
-                skills.forEach((element) => {
-                    localVarFormParams.append('Skills', element as any);
-                })
             }
 
             localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
@@ -533,7 +448,7 @@ export const ResumeApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiResumeResumesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ResumeDTO>>> {
+        async apiResumeResumesIdGet(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ResumeVM>>> {
             const localVarAxiosArgs = await ResumeApiAxiosParamCreator(configuration).apiResumeResumesIdGet(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -543,12 +458,10 @@ export const ResumeApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} id 
-         * @param {string} [id2] 
          * @param {string} [userId] 
          * @param {string} [title] 
          * @param {Date} [creationDate] 
          * @param {Blob} [personalInfoPhoto] 
-         * @param {string} [personalInfoPhotoUrl] 
          * @param {string} [personalInfoFirstName] 
          * @param {string} [personalInfoMiddleName] 
          * @param {string} [personalInfoLastName] 
@@ -561,16 +474,11 @@ export const ResumeApiFp = function(configuration?: Configuration) {
          * @param {Date} [unknownSectionStartDate] 
          * @param {Date} [unknownSectionEndDate] 
          * @param {string} [templateTemplateName] 
-         * @param {Array<CertificateDTO>} [certificates] 
-         * @param {Array<EducationDTO>} [educations] 
-         * @param {Array<WorkExperienceDTO>} [workExperiences] 
-         * @param {Array<LanguageDTO>} [languages] 
-         * @param {Array<SkillsDTO>} [skills] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiResumeResumesIdPutForm(id: string, id2?: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoPhotoUrl?: string, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, certificates?: Array<CertificateDTO>, educations?: Array<EducationDTO>, workExperiences?: Array<WorkExperienceDTO>, languages?: Array<LanguageDTO>, skills?: Array<SkillsDTO>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await ResumeApiAxiosParamCreator(configuration).apiResumeResumesIdPutForm(id, id2, userId, title, creationDate, personalInfoPhoto, personalInfoPhotoUrl, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, certificates, educations, workExperiences, languages, skills, options);
+        async apiResumeResumesIdPutForm(id: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ResumeApiAxiosParamCreator(configuration).apiResumeResumesIdPutForm(id, userId, title, creationDate, personalInfoPhoto, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -578,12 +486,10 @@ export const ResumeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} [id] 
          * @param {string} [userId] 
          * @param {string} [title] 
          * @param {Date} [creationDate] 
          * @param {Blob} [personalInfoPhoto] 
-         * @param {string} [personalInfoPhotoUrl] 
          * @param {string} [personalInfoFirstName] 
          * @param {string} [personalInfoMiddleName] 
          * @param {string} [personalInfoLastName] 
@@ -596,16 +502,11 @@ export const ResumeApiFp = function(configuration?: Configuration) {
          * @param {Date} [unknownSectionStartDate] 
          * @param {Date} [unknownSectionEndDate] 
          * @param {string} [templateTemplateName] 
-         * @param {Array<CertificateDTO>} [certificates] 
-         * @param {Array<EducationDTO>} [educations] 
-         * @param {Array<WorkExperienceDTO>} [workExperiences] 
-         * @param {Array<LanguageDTO>} [languages] 
-         * @param {Array<SkillsDTO>} [skills] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiResumeResumesPostForm(id?: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoPhotoUrl?: string, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, certificates?: Array<CertificateDTO>, educations?: Array<EducationDTO>, workExperiences?: Array<WorkExperienceDTO>, languages?: Array<LanguageDTO>, skills?: Array<SkillsDTO>, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await ResumeApiAxiosParamCreator(configuration).apiResumeResumesPostForm(id, userId, title, creationDate, personalInfoPhoto, personalInfoPhotoUrl, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, certificates, educations, workExperiences, languages, skills, options);
+        async apiResumeResumesPostForm(userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ResumeApiAxiosParamCreator(configuration).apiResumeResumesPostForm(userId, title, creationDate, personalInfoPhoto, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -648,18 +549,16 @@ export const ResumeApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiResumeResumesIdGet(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ResumeDTO>> {
+        async apiResumeResumesIdGet(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ResumeVM>> {
             return ResumeApiFp(configuration).apiResumeResumesIdGet(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} id 
-         * @param {string} [id2] 
          * @param {string} [userId] 
          * @param {string} [title] 
          * @param {Date} [creationDate] 
          * @param {Blob} [personalInfoPhoto] 
-         * @param {string} [personalInfoPhotoUrl] 
          * @param {string} [personalInfoFirstName] 
          * @param {string} [personalInfoMiddleName] 
          * @param {string} [personalInfoLastName] 
@@ -672,25 +571,18 @@ export const ResumeApiFactory = function (configuration?: Configuration, basePat
          * @param {Date} [unknownSectionStartDate] 
          * @param {Date} [unknownSectionEndDate] 
          * @param {string} [templateTemplateName] 
-         * @param {Array<CertificateDTO>} [certificates] 
-         * @param {Array<EducationDTO>} [educations] 
-         * @param {Array<WorkExperienceDTO>} [workExperiences] 
-         * @param {Array<LanguageDTO>} [languages] 
-         * @param {Array<SkillsDTO>} [skills] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiResumeResumesIdPutForm(id: string, id2?: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoPhotoUrl?: string, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, certificates?: Array<CertificateDTO>, educations?: Array<EducationDTO>, workExperiences?: Array<WorkExperienceDTO>, languages?: Array<LanguageDTO>, skills?: Array<SkillsDTO>, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return ResumeApiFp(configuration).apiResumeResumesIdPutForm(id, id2, userId, title, creationDate, personalInfoPhoto, personalInfoPhotoUrl, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, certificates, educations, workExperiences, languages, skills, options).then((request) => request(axios, basePath));
+        async apiResumeResumesIdPutForm(id: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ResumeApiFp(configuration).apiResumeResumesIdPutForm(id, userId, title, creationDate, personalInfoPhoto, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [id] 
          * @param {string} [userId] 
          * @param {string} [title] 
          * @param {Date} [creationDate] 
          * @param {Blob} [personalInfoPhoto] 
-         * @param {string} [personalInfoPhotoUrl] 
          * @param {string} [personalInfoFirstName] 
          * @param {string} [personalInfoMiddleName] 
          * @param {string} [personalInfoLastName] 
@@ -703,16 +595,11 @@ export const ResumeApiFactory = function (configuration?: Configuration, basePat
          * @param {Date} [unknownSectionStartDate] 
          * @param {Date} [unknownSectionEndDate] 
          * @param {string} [templateTemplateName] 
-         * @param {Array<CertificateDTO>} [certificates] 
-         * @param {Array<EducationDTO>} [educations] 
-         * @param {Array<WorkExperienceDTO>} [workExperiences] 
-         * @param {Array<LanguageDTO>} [languages] 
-         * @param {Array<SkillsDTO>} [skills] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiResumeResumesPostForm(id?: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoPhotoUrl?: string, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, certificates?: Array<CertificateDTO>, educations?: Array<EducationDTO>, workExperiences?: Array<WorkExperienceDTO>, languages?: Array<LanguageDTO>, skills?: Array<SkillsDTO>, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return ResumeApiFp(configuration).apiResumeResumesPostForm(id, userId, title, creationDate, personalInfoPhoto, personalInfoPhotoUrl, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, certificates, educations, workExperiences, languages, skills, options).then((request) => request(axios, basePath));
+        async apiResumeResumesPostForm(userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ResumeApiFp(configuration).apiResumeResumesPostForm(userId, title, creationDate, personalInfoPhoto, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -750,18 +637,16 @@ export class ResumeApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ResumeApi
      */
-    public async apiResumeResumesIdGet(id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<ResumeDTO>> {
+    public async apiResumeResumesIdGet(id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<ResumeVM>> {
         return ResumeApiFp(this.configuration).apiResumeResumesIdGet(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
      * @param {string} id 
-     * @param {string} [id2] 
      * @param {string} [userId] 
      * @param {string} [title] 
      * @param {Date} [creationDate] 
      * @param {Blob} [personalInfoPhoto] 
-     * @param {string} [personalInfoPhotoUrl] 
      * @param {string} [personalInfoFirstName] 
      * @param {string} [personalInfoMiddleName] 
      * @param {string} [personalInfoLastName] 
@@ -774,26 +659,19 @@ export class ResumeApi extends BaseAPI {
      * @param {Date} [unknownSectionStartDate] 
      * @param {Date} [unknownSectionEndDate] 
      * @param {string} [templateTemplateName] 
-     * @param {Array<CertificateDTO>} [certificates] 
-     * @param {Array<EducationDTO>} [educations] 
-     * @param {Array<WorkExperienceDTO>} [workExperiences] 
-     * @param {Array<LanguageDTO>} [languages] 
-     * @param {Array<SkillsDTO>} [skills] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ResumeApi
      */
-    public async apiResumeResumesIdPutForm(id: string, id2?: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoPhotoUrl?: string, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, certificates?: Array<CertificateDTO>, educations?: Array<EducationDTO>, workExperiences?: Array<WorkExperienceDTO>, languages?: Array<LanguageDTO>, skills?: Array<SkillsDTO>, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return ResumeApiFp(this.configuration).apiResumeResumesIdPutForm(id, id2, userId, title, creationDate, personalInfoPhoto, personalInfoPhotoUrl, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, certificates, educations, workExperiences, languages, skills, options).then((request) => request(this.axios, this.basePath));
+    public async apiResumeResumesIdPutForm(id: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ResumeApiFp(this.configuration).apiResumeResumesIdPutForm(id, userId, title, creationDate, personalInfoPhoto, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
-     * @param {string} [id] 
      * @param {string} [userId] 
      * @param {string} [title] 
      * @param {Date} [creationDate] 
      * @param {Blob} [personalInfoPhoto] 
-     * @param {string} [personalInfoPhotoUrl] 
      * @param {string} [personalInfoFirstName] 
      * @param {string} [personalInfoMiddleName] 
      * @param {string} [personalInfoLastName] 
@@ -806,17 +684,12 @@ export class ResumeApi extends BaseAPI {
      * @param {Date} [unknownSectionStartDate] 
      * @param {Date} [unknownSectionEndDate] 
      * @param {string} [templateTemplateName] 
-     * @param {Array<CertificateDTO>} [certificates] 
-     * @param {Array<EducationDTO>} [educations] 
-     * @param {Array<WorkExperienceDTO>} [workExperiences] 
-     * @param {Array<LanguageDTO>} [languages] 
-     * @param {Array<SkillsDTO>} [skills] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ResumeApi
      */
-    public async apiResumeResumesPostForm(id?: string, userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoPhotoUrl?: string, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, certificates?: Array<CertificateDTO>, educations?: Array<EducationDTO>, workExperiences?: Array<WorkExperienceDTO>, languages?: Array<LanguageDTO>, skills?: Array<SkillsDTO>, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return ResumeApiFp(this.configuration).apiResumeResumesPostForm(id, userId, title, creationDate, personalInfoPhoto, personalInfoPhotoUrl, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, certificates, educations, workExperiences, languages, skills, options).then((request) => request(this.axios, this.basePath));
+    public async apiResumeResumesPostForm(userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ResumeApiFp(this.configuration).apiResumeResumesPostForm(userId, title, creationDate, personalInfoPhoto, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

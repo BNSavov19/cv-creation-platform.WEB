@@ -14,25 +14,19 @@
 /**
  * 
  * @export
- * @interface CertificateDTO
+ * @interface LanguagesResumeIdBody
  */
-export interface CertificateDTO {
+export interface LanguagesResumeIdBody {
     /**
      * 
      * @type {string}
-     * @memberof CertificateDTO
+     * @memberof LanguagesResumeIdBody
      */
-    certificateName?: string | null;
+    name?: string;
     /**
      * 
      * @type {string}
-     * @memberof CertificateDTO
+     * @memberof LanguagesResumeIdBody
      */
-    issuingOrganization?: string | null;
-    /**
-     * 
-     * @type {Date}
-     * @memberof CertificateDTO
-     */
-    issueDate?: Date | null;
+    level?: string;
 }

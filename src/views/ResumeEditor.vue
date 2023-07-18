@@ -5,10 +5,10 @@
             <PersonalDetailsForm  v-if="resume.personalInfo" :personalInfoData="resume.personalInfo" @value:updated="onPersonalInfoUpdated"/>
         </div>
         <div class="form-section">
-            <EmploymentHistorySection :employments="resume.workExperiences" @add:employment="addEmployment" />
+            <EmploymentHistorySection :employments="resume.workExperiences" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" @updatedValue="updateValue"/>
         </div>
         <div class="form-section">
-            <EducationSection :educations="resume.educations" @add:education="addEducation"/>
+            <EducationSection :educations="resume.educations" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" @value:updated="updateValue"/>
         </div>
         <div class="form-section">
             <SkillsSection :skills="resume.skills"/>
@@ -19,6 +19,7 @@
         <div class="resume-preview" ref="resumePreview">
             <Resume :resumeData="resume"></Resume>
         </div>
+        <button>Download</button>
     </div>
 </div>
 </template>
@@ -30,7 +31,7 @@ import Resume from '@/components/Resume.vue';
 import { onMounted, ref, type Ref } from 'vue'
 import { useElementSize, useResizeObserver } from '@vueuse/core'
 import resumeService from '@/services/resume-service'
-import { type PersonalInfoDTO, type ResumeDTO } from '@/api'
+import { type ResumeVM, type CertificateVM, type WorkExperienceVM } from '@/api'
 import { useRoute } from 'vue-router';
 import PersonalDetailsForm from '@/components/forms/PersonalDetailsForm.vue';
 import EmploymentHistorySection from '@/components/misc/EmploymentHistorySection.vue';
@@ -38,7 +39,7 @@ import EducationSection from '@/components/misc/EducationSection.vue';
 import SkillsSection from '@/components/misc/SkillsSection.vue';
 
 const route = useRoute();
-let resume: Ref<ResumeDTO> = ref({});
+let resume: Ref<ResumeVM> = ref({});
     
 let resumePreviewScale: Ref<number> = ref(0.9);
 let resumePreview = ref(), previewSection = ref();
@@ -61,8 +62,12 @@ onMounted(async ()=>{
     })
 })
 
-function addEmployment() {
-    resume.value.workExperiences?.push({});
+async function updateValue() {
+//     resumeService.getResumeById(route.params.id as string).then((res)=>{
+//         resume.value = res.data;
+//    });
+
+   resume.value = (await resumeService.getResumeById(route.params.id as string)).data;
 }
 
 function addEducation() {
@@ -79,8 +84,6 @@ function onPersonalInfoUpdated(personalInfo: any) {
         resume.value.personalInfo.email = personalInfo.Email;
         resume.value.personalInfo.phoneNumber = personalInfo.Phone;
     }
-
-
 } 
 
 </script>

@@ -1,4 +1,4 @@
-import { ResumeApi, type ResumeDTO} from "@/api";
+import { ResumeApi, type ResumeVM } from "@/api";
 import { WebApiService } from "./web-api-service";
 import type { AxiosResponse } from "axios";
 
@@ -11,23 +11,42 @@ export class ResumeService extends WebApiService {
 
     resumeApi: ResumeApi;
 
-    public async getAllResumes(userId: string): Promise<AxiosResponse<Array<ResumeDTO>, any>> {
+    public async getAllResumes(userId: string): Promise<AxiosResponse<Array<ResumeVM>, any>> {
         return await this.resumeApi.apiResumeUserResumesUserIdGet(userId, this.generateHeader());
     }
 
-    public async getResumeById(resumeId: string):  Promise<AxiosResponse<ResumeDTO>>
+    public async getResumeById(resumeId: string):  Promise<AxiosResponse<ResumeVM>>
     {
         return await this.resumeApi.apiResumeResumesIdGet(resumeId, this.generateHeader());
     }
 
-    // public async updateResume(resume: ResumeDTO): Promise<AxiosResponse<ResumeDTO>>
+    // public async updateResume(resume: ResumeVM, profileImage?: Blob)
     // {
-    //     return await this.resumeApi.apiResumeResumesIdPutForm('id', resume.userId, resume.title, resume.creationDate, resume.personalInfo?.photoUrl,
-    //     resume.personalInfo?.fullName, resume.personalInfo?.address, resume.personalInfo?.phoneNumber, resume.personalInfo?.email, resume.unknownSection?.title,
-    //     resume.unknownSection?.description, resume.unknownSection?.startDate, resume.unknownSection?.endDate, resume.template?.templateName,
-    //     resume.template?.cssClassName, resume.template?.filePath, resume.certificates, resume.educations, resume.workExperiences, resume.languages,
-    //     resume.skills, this.generateHeader());
+
+    //     let employments: WorkExperienceDTO[] = [];
+
+    //     for(let we of resume.workExperiences)
+    //     {
+    //         let employment: WorkExperienceDTO = {
+    //             companyName: we.companyName,
+    //             position: we.position,
+    //             startDate: we.startDate,
+    //             endDate: we.endDate,
+    //             location: we.location,
+    //             description: we.description
+    //         }
+    //         employments.push(employment);
+
+    //     }
+
+    //     await this.resumeApi.apiResumeResumesIdPutForm(resume.id, resume.userId, resume.title, resume.creationDate, profileImage, resume.personalInfo?.photoUrl, 
+    //         resume.personalInfo?.firstName, resume.personalInfo?.middleName, resume.personalInfo?.lastName, resume.personalInfo?.description, resume.personalInfo?.address,
+    //         resume.personalInfo?.phoneNumber, resume.personalInfo?.email, resume.unknownSection?.title, resume.unknownSection?.description, resume.creationDate,
+    //         resume.creationDate, resume.template?.templateName, resume.certificates, resume.educations,  employments , resume.languages, resume.skills,
+    //         this.generateHeader())
     // }
+
+
 
 }
 

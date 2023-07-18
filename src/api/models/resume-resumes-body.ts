@@ -11,23 +11,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CertificateDTO } from './certificate-dto';
-import { EducationDTO } from './education-dto';
-import { LanguageDTO } from './language-dto';
-import { SkillsDTO } from './skills-dto';
-import { WorkExperienceDTO } from './work-experience-dto';
 /**
  * 
  * @export
  * @interface ResumeResumesBody
  */
 export interface ResumeResumesBody {
-    /**
-     * 
-     * @type {string}
-     * @memberof ResumeResumesBody
-     */
-    id?: string;
     /**
      * 
      * @type {string}
@@ -52,12 +41,6 @@ export interface ResumeResumesBody {
      * @memberof ResumeResumesBody
      */
     personalInfoPhoto?: Blob;
-    /**
-     * 
-     * @type {string}
-     * @memberof ResumeResumesBody
-     */
-    personalInfoPhotoUrl?: string;
     /**
      * 
      * @type {string}
@@ -130,34 +113,4 @@ export interface ResumeResumesBody {
      * @memberof ResumeResumesBody
      */
     templateTemplateName?: string;
-    /**
-     * 
-     * @type {Array<CertificateDTO>}
-     * @memberof ResumeResumesBody
-     */
-    certificates?: Array<CertificateDTO>;
-    /**
-     * 
-     * @type {Array<EducationDTO>}
-     * @memberof ResumeResumesBody
-     */
-    educations?: Array<EducationDTO>;
-    /**
-     * 
-     * @type {Array<WorkExperienceDTO>}
-     * @memberof ResumeResumesBody
-     */
-    workExperiences?: Array<WorkExperienceDTO>;
-    /**
-     * 
-     * @type {Array<LanguageDTO>}
-     * @memberof ResumeResumesBody
-     */
-    languages?: Array<LanguageDTO>;
-    /**
-     * 
-     * @type {Array<SkillsDTO>}
-     * @memberof ResumeResumesBody
-     */
-    skills?: Array<SkillsDTO>;
 }
