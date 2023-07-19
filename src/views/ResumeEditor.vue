@@ -99,7 +99,7 @@ function onPersonalInfoUpdated(personalInfo: any) {
         height: fit-content;
         background: white;
         box-sizing: border-box;
-        padding: 48px;
+        padding: 70px;
 
         .form-section {
             margin-bottom: 3rem;

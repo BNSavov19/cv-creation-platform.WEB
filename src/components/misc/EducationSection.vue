@@ -1,6 +1,6 @@
 <template>
     <h1 class="heading">Education</h1>
-    <EducationForm v-for="education in props.educations" :educationData="education"  @updated:value="onValueUpdate"/>
+    <EducationForm v-for="education in props.educations" :educationData="education" @deleted:education="onDeletedEducation" @updated:value="onValueUpdate"/>
     <div class="add-education-button" @click="addEducation">+ Add education</div>
 </template>
 
@@ -26,6 +26,12 @@ function addEducation() {
 
 function onValueUpdate(id: number, data: any) {
     educationService.updateEducation(id, data as EducationVM).then(()=>{
+        emits('value:updated');
+    })
+}
+
+function onDeletedEducation(id: number) {
+    educationService.deleteEducation(id).then(()=>{
         emits('value:updated');
     })
 }

@@ -1,0 +1,54 @@
+{
+    "routes": [
+      {
+        "route": "/",
+        "allowedRoles": ["anonymous"]
+      },
+      {
+        "route": "/resumes",
+        "allowedRoles": ["anonymous"]
+      },
+      {
+        "route": "/resumes/create/templates",
+        "allowedRoles": ["anonymous"]
+      },
+      {
+        "route": "/resumes/*/editor",
+        "allowedRoles": ["anonymous"]
+      },
+      {
+        "route": "/auth/login",
+        "allowedRoles": ["anonymous"]
+      },
+      {
+        "route": "/auth/register",
+        "allowedRoles": ["anonymous"]
+      }
+    ],
+    "navigationFallback": {
+      "rewrite": "index.html",
+      "exclude": ["/images/.{png,jpg,gif}", "/css/*"]
+    },
+    "responseOverrides": {
+      "400": {
+        "rewrite": "/"
+      },
+      "401": {
+        "redirect": "/",
+        "statusCode": 302
+      },
+      "403": {
+        "rewrite": "/"
+      },
+      "404": {
+        "rewrite": "/",
+        "statusCode": 200
+      }
+    },
+    "mimeTypes": {
+      ".html": "text/html",
+      ".json": "text/json",
+      ".css": "text/css",
+      ".js": "text/javascript"
+    }
+  }

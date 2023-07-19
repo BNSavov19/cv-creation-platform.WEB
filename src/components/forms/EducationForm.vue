@@ -6,6 +6,7 @@
 
             <IconArrowDown v-if="active" class="arrow"/>
             <IconArrowUp v-else class="arrow"/>
+            <IconDelete class="delete-icon" @click="emits('deleted:education', props.educationData.id)"/>
         </div>
         <div v-if="active" class="employment-history-form">
             <InputField 
@@ -59,12 +60,13 @@ import { required, helpers} from '@vuelidate/validators'
 import type { EducationVM } from '@/api';
 import IconArrowDown from '../icons/IconArrowDown.vue';
 import IconArrowUp from '../icons/IconArrowUp.vue';
+import IconDelete from '../icons/IconDelete.vue';
 
 const props = defineProps<{
     educationData: EducationVM,
 }>();
 
-const emits = defineEmits(['updated:value']);
+const emits = defineEmits(['updated:value', 'deleted:education']);
 
 const active: Ref<boolean> = ref(false);
 
@@ -114,7 +116,32 @@ h1 {
             top: 35%;
             right: 0;
             fill: #9fa6bb;
+        }
 
+        .delete-icon {
+            position: absolute;
+            top: 38%;
+            right: -10%;
+            fill: #9fa6bb;
+            opacity: 0;
+            transition: opacity .1s;
+            cursor: pointer;
+
+            &:before {
+                content: "";
+                position: absolute;
+                inset: -8px;
+            }
+
+            &:hover {
+                fill: rgb(26, 145, 240);
+            }
+        }
+
+        &:hover {
+            .delete-icon {
+                opacity: 1;
+            }
         }
     }
     

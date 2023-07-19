@@ -1,68 +1,73 @@
 <template>
-    <div class="employment-container">
-        <div class="employment-heading" @click="active = !active">
-            <span v-if="props.workExperienceData.position || props.workExperienceData.companyName">{{props.workExperienceData.position}} <span v-if="props.workExperienceData.companyName">at {{props.workExperienceData.companyName}}</span> </span>
-            <span v-else>(Not specified)</span>
+    <div class="employment-wrapper">
 
-            <IconArrowDown v-if="active == false" class="arrow"/>
-            <IconArrowUp v-else class="arrow"/>
-        </div>
-        <div v-if="active" class="employment-history-form">
-            <div class="grid-container">
-                <InputField 
-                    :vModel="form.position"
-                    :type="'text'"
-                    :name="'JobTitle'"
-                    :title="'Job title'"
-                    :updateCallback="(value: string)=>{form.position = value}"
-                    @update:value="onUpdateValue" />
-        
-                <InputField 
-                    :vModel="form.companyName"
-                    :type="'text'"
-                    :name="'Employer'"
-                    :title="'Employer'"
-                    :updateCallback="(value: string)=>{form.companyName = value}"
-                    @update:value="onUpdateValue" />
+        <div class="employment-container">
+            <div class="employment-heading" @click="active = !active">
+                <span v-if="props.workExperienceData.position || props.workExperienceData.companyName">{{props.workExperienceData.position}} <span v-if="props.workExperienceData.companyName">at {{props.workExperienceData.companyName}}</span> </span>
+                <span v-else>(Not specified)</span>
     
-                <div class="dates-container">
+                <IconArrowDown v-if="active == false" class="arrow"/>
+                <IconArrowUp v-else class="arrow"/>
+                <IconDelete class="delete-icon" @click="emits('deleted:employment', props.workExperienceData.id)"/>
+            </div>
+            <div v-if="active" class="employment-history-form">
+                <div class="grid-container">
                     <InputField 
-                        :vModel="form.startDate"
-                        :type="'date'"
-                        :name="'StartDate'"
-                        :title="'Start Date'"
-                        class="start-date"
-                        :updateCallback="(value: Date)=>{form.startDate = value}"
+                        :vModel="form.position"
+                        :type="'text'"
+                        :name="'JobTitle'"
+                        :title="'Job title'"
+                        :updateCallback="(value: string)=>{form.position = value}"
                         @update:value="onUpdateValue" />
             
                     <InputField 
-                        :vModel="form.endDate"
-                        :type="'date'"
-                        :name="'EndDate'"
-                        :title="'End Date'"
-                        class="end-date"
-                        :updateCallback="(value: Date)=>{form.endDate = value}"
+                        :vModel="form.companyName"
+                        :type="'text'"
+                        :name="'Employer'"
+                        :title="'Employer'"
+                        :updateCallback="(value: string)=>{form.companyName = value}"
+                        @update:value="onUpdateValue" />
+        
+                    <div class="dates-container">
+                        <InputField 
+                            :vModel="form.startDate"
+                            :type="'date'"
+                            :name="'StartDate'"
+                            :title="'Start Date'"
+                            class="start-date"
+                            :updateCallback="(value: Date)=>{form.startDate = value}"
+                            @update:value="onUpdateValue" />
+                
+                        <InputField 
+                            :vModel="form.endDate"
+                            :type="'date'"
+                            :name="'EndDate'"
+                            :title="'End Date'"
+                            class="end-date"
+                            :updateCallback="(value: Date)=>{form.endDate = value}"
+                            @update:value="onUpdateValue" />
+                    </div>
+            
+            
+                    <InputField 
+                        :vModel="form.City"
+                        :type="'text'"
+                        :name="'City'"
+                        :title="'City'"
+                        :updateCallback="(value: string)=>{form.City = value}"
                         @update:value="onUpdateValue" />
                 </div>
         
-        
-                <InputField 
-                    :vModel="form.City"
+                <TextAreaField 
+                    :vModel="form.description"
                     :type="'text'"
-                    :name="'City'"
-                    :title="'City'"
-                    :updateCallback="(value: string)=>{form.City = value}"
+                    :name="'Description'"
+                    :title="'Description'"
+                    class="description"
+                    :updateCallback="(value: string)=>{form.description = value}"
                     @update:value="onUpdateValue" />
             </div>
     
-            <TextAreaField 
-                :vModel="form.description"
-                :type="'text'"
-                :name="'Description'"
-                :title="'Description'"
-                class="description"
-                :updateCallback="(value: string)=>{form.description = value}"
-                @update:value="onUpdateValue" />
         </div>
     </div>
 </template>
@@ -75,13 +80,14 @@ import { required, helpers} from '@vuelidate/validators'
 import type { WorkExperienceVM } from '@/api';
 import IconArrowDown from '../icons/IconArrowDown.vue';
 import IconArrowUp from '../icons/IconArrowUp.vue';
+import IconDelete from '../icons/IconDelete.vue';
 import TextAreaField from '../TextAreaField.vue';
 
 const props = defineProps<{
     workExperienceData: WorkExperienceVM,
 }>();
 
-const emits = defineEmits(['updated:value']);
+const emits = defineEmits(['updated:value', 'deleted:employment']);
 
 const active: Ref<boolean> = ref(false);
 
@@ -117,6 +123,16 @@ h1 {
     box-sizing: border-box;
     padding: 15px 20px;
     margin-bottom: 15px;
+    position: relative;
+
+    .delete-icon {
+        position: absolute;
+        top: 40%;
+        right: -4%;
+        fill: #9fa6bb;
+        display: none;
+        opacity: 0;
+    }
     
     .employment-heading {
         width: 100%;
@@ -132,7 +148,36 @@ h1 {
             top: 35%;
             right: 0;
             fill: #9fa6bb;
+        }
 
+        .delete-icon {
+            position: absolute;
+            top: 38%;
+            right: -10%;
+            fill: #9fa6bb;
+            opacity: 0;
+            transition: opacity .1s;
+            cursor: pointer;
+            display: block;
+
+            &:before {
+                content: "";
+                position: absolute;
+                inset: -8px;
+            }
+
+            &:hover {
+                fill: rgb(26, 145, 240);
+                display: block;
+                opacity: 1;
+            }
+        }
+
+        &:hover {
+            .delete-icon {
+                display: block;
+                opacity: 1;
+            }
         }
     }
     
@@ -183,6 +228,7 @@ h1 {
                 fill: rgb(26, 145, 240);
             }
         }
+
     }
 }
 </style>

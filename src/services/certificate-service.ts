@@ -15,6 +15,7 @@ export class CertificateService extends WebApiService {
         return await this.certificateApi.apiCertificateCertificatesResumeIdPostForm(resumeId, certificateData!.certificateName!, certificateData!.issuingOrganization!,
             certificateData!.issueDate!, this.generateHeader());
     }
+    
 
     public async updateCertificate(certificateId: number, certificateData: CertificateVM): Promise<AxiosResponse<any>>
     {
