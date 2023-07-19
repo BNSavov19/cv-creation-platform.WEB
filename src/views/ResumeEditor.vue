@@ -1,5 +1,8 @@
 <template>
 <div class="editor-wrapper">
+    <header class="page-header">
+        <h2 class="header-logo"><RouterLink :to="{path:'/'}"><span class="logo-text">Resu</span><span class="logo-suffix">.me</span></RouterLink></h2>
+    </header>
     <div class="sidebar-section">
         <div class="form-section">
             <PersonalDetailsForm  v-if="resume.personalInfo" :personalInfoData="resume.personalInfo" @value:updated="onPersonalInfoUpdated"/>
@@ -89,6 +92,7 @@ function onPersonalInfoUpdated(personalInfo: any) {
 </script>
 
 <style lang="scss" scoped>
+@import '../styles/imports.scss';
 .editor-wrapper {
     height: 100vh;
 

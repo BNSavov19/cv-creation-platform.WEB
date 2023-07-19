@@ -1,19 +1,20 @@
 <template>
-    <div class="resume-wrapper" :class="`template-${props.resumeData.template}`">
+    <div class="resume-wrapper" :class="`template-template3`">
 
         <div class="top-section">
             <div class="photo">
-                <img  v-if="props.resumeData.personalInfo?.photoUrl" :src="props.resumeData.personalInfo.photoUrl" alt="photo">
-            </div>
-            <div class="details">
-                <span>{{props.resumeData.personalInfo?.email}}, </span>
-                <span>{{props.resumeData.personalInfo?.address}}, </span>
-                <span>{{props.resumeData.personalInfo?.phoneNumber}}</span>
+                <img v-if="props.resumeData.personalInfo?.photoUrl" :src="props.resumeData.personalInfo.photoUrl" alt="photo">
             </div>
 
             <div class="title">
                 <!-- <h1>{{props.resumeData.personalInfo?.fullName}}</h1> -->
                 <span>{{props.resumeData.personalInfo?.firstName}} {{props.resumeData.personalInfo?.lastName}}</span>
+            </div>    
+            
+            <div class="details">
+                <span>{{props.resumeData.personalInfo?.email}}, </span>
+                <span>{{props.resumeData.personalInfo?.address}}, </span>
+                <span>{{props.resumeData.personalInfo?.phoneNumber}}</span>
             </div>
         </div>
         
