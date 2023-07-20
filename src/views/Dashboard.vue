@@ -8,8 +8,9 @@
             <div class="side-bar">
                 <div class="profile">
                     <div class="pic-and-username">
-                        <img src="../assets/stock-images/stockimage1.jpg" alt="" class="profile-pic">
+                        <img src="../assets/stock-images/user.png" alt="" class="profile-pic">
                         <h3 class="username">John Doe</h3>
+                        <span class="logout-button" @click="logout">Logout</span>
                     </div>
                 </div>
 
@@ -37,6 +38,11 @@ import Resumes from './Resumes.vue';
 import PersonalDetailsForm from '../components/forms/PersonalDetailsForm.vue'
 import type { ResumeDTO } from '@/api';
 import resumeService from '@/services/resume-service';
+import {
+    LOCAL_STORAGE_TOKEN_KEY,
+    LOCAL_STORAGE_USER_ID_KEY
+} from '@/shared/constants'
+
 
 const activeComponent = ref(Resumes);
 
@@ -50,6 +56,13 @@ onMounted(async ()=>{
         console.log(resumes.value);
     });
 })
+
+function logout() {
+    localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+    localStorage.removeItem(LOCAL_STORAGE_USER_ID_KEY);
+
+    router.push({name:'login'});
+}
 
 </script>
 
@@ -92,6 +105,23 @@ onMounted(async ()=>{
                         margin-left: 2rem;
                         font-size: 1.6rem;
                         font-weight: 600;
+                    }
+
+                    .logout-button {   
+                        margin-left: 9rem;
+                        background-color: rgb(215, 215, 215);
+                        color: #2c2c2c;
+                        font-size: 1rem;
+                        font-weight: 600;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        transition: all 0.3s ease;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: $accent-color;
+                            color: white;
+                        }
                     }
                 }
             }
