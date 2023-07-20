@@ -13,13 +13,13 @@ export class EducationService extends WebApiService {
 
     public async addEducationToResume(resumeId: string, educationData: EducationVM): Promise<AxiosResponse<any>> {
         return await this.educationApi.apiEducationEducationsResumeIdPostForm(resumeId, educationData!.instituteName!, educationData!.degree!,
-            educationData!.fieldOfStudy!, educationData.startDate!, educationData.endDate!, this.generateHeader());
+            educationData!.fieldOfStudy!, new Date().toDateString(), new Date().toDateString(), this.generateHeader());
     }
 
     public async updateEducation(educationId: number, educationData: EducationVM): Promise<AxiosResponse<any>>
     {
         return await this.educationApi.apiEducationEducationsEducationIdPutForm(educationId, educationData!.instituteName!, educationData!.degree!,
-            educationData!.fieldOfStudy!, educationData.startDate!, educationData.endDate!, this.generateHeader())
+            educationData!.fieldOfStudy!, new Date().toDateString(), new Date().toDateString(), this.generateHeader())
     }
 
     public async deleteEducation(educationId: number)

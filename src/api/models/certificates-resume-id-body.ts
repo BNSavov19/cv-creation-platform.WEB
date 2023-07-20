@@ -31,8 +31,8 @@ export interface CertificatesResumeIdBody {
     issuingOrganization?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof CertificatesResumeIdBody
      */
-    issueDate?: Date;
+    issueDate?: string;
 }

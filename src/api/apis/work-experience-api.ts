@@ -11,7 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import globalAxios, { type AxiosResponse, type AxiosInstance, type AxiosRequestConfig } from 'axios';
+import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -27,14 +27,14 @@ export const WorkExperienceApiAxiosParamCreator = function (configuration?: Conf
          * @param {string} resumeId 
          * @param {string} [companyName] 
          * @param {string} [position] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {string} [location] 
          * @param {string} [description] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkExperienceWorkExperiencesResumeIdPostForm: async (resumeId: string, companyName?: string, position?: string, startDate?: Date, endDate?: Date, location?: string, description?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiWorkExperienceWorkExperiencesResumeIdPostForm: async (resumeId: string, companyName?: string, position?: string, startDate?: string, endDate?: string, location?: string, description?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'resumeId' is not null or undefined
             if (resumeId === null || resumeId === undefined) {
                 throw new RequiredError('resumeId','Required parameter resumeId was null or undefined when calling apiWorkExperienceWorkExperiencesResumeIdPostForm.');
@@ -155,14 +155,14 @@ export const WorkExperienceApiAxiosParamCreator = function (configuration?: Conf
          * @param {number} workExperienceId 
          * @param {string} [companyName] 
          * @param {string} [position] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {string} [location] 
          * @param {string} [description] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm: async (workExperienceId: number, companyName?: string, position?: string, startDate?: Date, endDate?: Date, location?: string, description?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm: async (workExperienceId: number, companyName?: string, position?: string, startDate?: string, endDate?: string, location?: string, description?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'workExperienceId' is not null or undefined
             if (workExperienceId === null || workExperienceId === undefined) {
                 throw new RequiredError('workExperienceId','Required parameter workExperienceId was null or undefined when calling apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm.');
@@ -245,14 +245,14 @@ export const WorkExperienceApiFp = function(configuration?: Configuration) {
          * @param {string} resumeId 
          * @param {string} [companyName] 
          * @param {string} [position] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {string} [location] 
          * @param {string} [description] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId: string, companyName?: string, position?: string, startDate?: Date, endDate?: Date, location?: string, description?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId: string, companyName?: string, position?: string, startDate?: string, endDate?: string, location?: string, description?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
             const localVarAxiosArgs = await WorkExperienceApiAxiosParamCreator(configuration).apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId, companyName, position, startDate, endDate, location, description, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -277,14 +277,14 @@ export const WorkExperienceApiFp = function(configuration?: Configuration) {
          * @param {number} workExperienceId 
          * @param {string} [companyName] 
          * @param {string} [position] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {string} [location] 
          * @param {string} [description] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId: number, companyName?: string, position?: string, startDate?: Date, endDate?: Date, location?: string, description?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId: number, companyName?: string, position?: string, startDate?: string, endDate?: string, location?: string, description?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
             const localVarAxiosArgs = await WorkExperienceApiAxiosParamCreator(configuration).apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId, companyName, position, startDate, endDate, location, description, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -305,14 +305,14 @@ export const WorkExperienceApiFactory = function (configuration?: Configuration,
          * @param {string} resumeId 
          * @param {string} [companyName] 
          * @param {string} [position] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {string} [location] 
          * @param {string} [description] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId: string, companyName?: string, position?: string, startDate?: Date, endDate?: Date, location?: string, description?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId: string, companyName?: string, position?: string, startDate?: string, endDate?: string, location?: string, description?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
             return WorkExperienceApiFp(configuration).apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId, companyName, position, startDate, endDate, location, description, options).then((request) => request(axios, basePath));
         },
         /**
@@ -329,14 +329,14 @@ export const WorkExperienceApiFactory = function (configuration?: Configuration,
          * @param {number} workExperienceId 
          * @param {string} [companyName] 
          * @param {string} [position] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {string} [location] 
          * @param {string} [description] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId: number, companyName?: string, position?: string, startDate?: Date, endDate?: Date, location?: string, description?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId: number, companyName?: string, position?: string, startDate?: string, endDate?: string, location?: string, description?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
             return WorkExperienceApiFp(configuration).apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId, companyName, position, startDate, endDate, location, description, options).then((request) => request(axios, basePath));
         },
     };
@@ -354,15 +354,15 @@ export class WorkExperienceApi extends BaseAPI {
      * @param {string} resumeId 
      * @param {string} [companyName] 
      * @param {string} [position] 
-     * @param {Date} [startDate] 
-     * @param {Date} [endDate] 
+     * @param {string} [startDate] 
+     * @param {string} [endDate] 
      * @param {string} [location] 
      * @param {string} [description] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkExperienceApi
      */
-    public async apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId: string, companyName?: string, position?: string, startDate?: Date, endDate?: Date, location?: string, description?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId: string, companyName?: string, position?: string, startDate?: string, endDate?: string, location?: string, description?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return WorkExperienceApiFp(this.configuration).apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId, companyName, position, startDate, endDate, location, description, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -380,15 +380,15 @@ export class WorkExperienceApi extends BaseAPI {
      * @param {number} workExperienceId 
      * @param {string} [companyName] 
      * @param {string} [position] 
-     * @param {Date} [startDate] 
-     * @param {Date} [endDate] 
+     * @param {string} [startDate] 
+     * @param {string} [endDate] 
      * @param {string} [location] 
      * @param {string} [description] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof WorkExperienceApi
      */
-    public async apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId: number, companyName?: string, position?: string, startDate?: Date, endDate?: Date, location?: string, description?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId: number, companyName?: string, position?: string, startDate?: string, endDate?: string, location?: string, description?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return WorkExperienceApiFp(this.configuration).apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId, companyName, position, startDate, endDate, location, description, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -19,7 +19,7 @@ const props = defineProps<{
 const emits = defineEmits(["updatedValue"])
 
 function addEmployment() {
-    workExperienceService.addWorkExperienceToResume(props.resumeId!, {companyName:'', position: '', startDate: props.resumeCreationDate, endDate: props.resumeCreationDate, location:'', description:''} as WorkExperienceVM).then(()=>{
+    workExperienceService.addWorkExperienceToResume(props.resumeId!, {companyName:'', position: '', startDate: new Date(), endDate: new Date(), location:'', description:''} as WorkExperienceVM).then(()=>{
         emits('updatedValue');
     })
 }

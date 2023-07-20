@@ -11,7 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import globalAxios, { type AxiosResponse, type AxiosInstance, type AxiosRequestConfig } from 'axios';
+import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -74,11 +74,11 @@ export const CertificateApiAxiosParamCreator = function (configuration?: Configu
          * @param {number} certificateId 
          * @param {string} [certificateName] 
          * @param {string} [issuingOrganization] 
-         * @param {Date} [issueDate] 
+         * @param {string} [issueDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiCertificateCertificatesCertificateIdPutForm: async (certificateId: number, certificateName?: string, issuingOrganization?: string, issueDate?: Date, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiCertificateCertificatesCertificateIdPutForm: async (certificateId: number, certificateName?: string, issuingOrganization?: string, issueDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'certificateId' is not null or undefined
             if (certificateId === null || certificateId === undefined) {
                 throw new RequiredError('certificateId','Required parameter certificateId was null or undefined when calling apiCertificateCertificatesCertificateIdPutForm.');
@@ -140,11 +140,11 @@ export const CertificateApiAxiosParamCreator = function (configuration?: Configu
          * @param {string} resumeId 
          * @param {string} [certificateName] 
          * @param {string} [issuingOrganization] 
-         * @param {Date} [issueDate] 
+         * @param {string} [issueDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiCertificateCertificatesResumeIdPostForm: async (resumeId: string, certificateName?: string, issuingOrganization?: string, issueDate?: Date, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiCertificateCertificatesResumeIdPostForm: async (resumeId: string, certificateName?: string, issuingOrganization?: string, issueDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'resumeId' is not null or undefined
             if (resumeId === null || resumeId === undefined) {
                 throw new RequiredError('resumeId','Required parameter resumeId was null or undefined when calling apiCertificateCertificatesResumeIdPostForm.');
@@ -228,11 +228,11 @@ export const CertificateApiFp = function(configuration?: Configuration) {
          * @param {number} certificateId 
          * @param {string} [certificateName] 
          * @param {string} [issuingOrganization] 
-         * @param {Date} [issueDate] 
+         * @param {string} [issueDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiCertificateCertificatesCertificateIdPutForm(certificateId: number, certificateName?: string, issuingOrganization?: string, issueDate?: Date, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiCertificateCertificatesCertificateIdPutForm(certificateId: number, certificateName?: string, issuingOrganization?: string, issueDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
             const localVarAxiosArgs = await CertificateApiAxiosParamCreator(configuration).apiCertificateCertificatesCertificateIdPutForm(certificateId, certificateName, issuingOrganization, issueDate, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -244,11 +244,11 @@ export const CertificateApiFp = function(configuration?: Configuration) {
          * @param {string} resumeId 
          * @param {string} [certificateName] 
          * @param {string} [issuingOrganization] 
-         * @param {Date} [issueDate] 
+         * @param {string} [issueDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiCertificateCertificatesResumeIdPostForm(resumeId: string, certificateName?: string, issuingOrganization?: string, issueDate?: Date, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiCertificateCertificatesResumeIdPostForm(resumeId: string, certificateName?: string, issuingOrganization?: string, issueDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
             const localVarAxiosArgs = await CertificateApiAxiosParamCreator(configuration).apiCertificateCertificatesResumeIdPostForm(resumeId, certificateName, issuingOrganization, issueDate, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -278,11 +278,11 @@ export const CertificateApiFactory = function (configuration?: Configuration, ba
          * @param {number} certificateId 
          * @param {string} [certificateName] 
          * @param {string} [issuingOrganization] 
-         * @param {Date} [issueDate] 
+         * @param {string} [issueDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiCertificateCertificatesCertificateIdPutForm(certificateId: number, certificateName?: string, issuingOrganization?: string, issueDate?: Date, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiCertificateCertificatesCertificateIdPutForm(certificateId: number, certificateName?: string, issuingOrganization?: string, issueDate?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
             return CertificateApiFp(configuration).apiCertificateCertificatesCertificateIdPutForm(certificateId, certificateName, issuingOrganization, issueDate, options).then((request) => request(axios, basePath));
         },
         /**
@@ -290,11 +290,11 @@ export const CertificateApiFactory = function (configuration?: Configuration, ba
          * @param {string} resumeId 
          * @param {string} [certificateName] 
          * @param {string} [issuingOrganization] 
-         * @param {Date} [issueDate] 
+         * @param {string} [issueDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiCertificateCertificatesResumeIdPostForm(resumeId: string, certificateName?: string, issuingOrganization?: string, issueDate?: Date, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiCertificateCertificatesResumeIdPostForm(resumeId: string, certificateName?: string, issuingOrganization?: string, issueDate?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
             return CertificateApiFp(configuration).apiCertificateCertificatesResumeIdPostForm(resumeId, certificateName, issuingOrganization, issueDate, options).then((request) => request(axios, basePath));
         },
     };
@@ -322,12 +322,12 @@ export class CertificateApi extends BaseAPI {
      * @param {number} certificateId 
      * @param {string} [certificateName] 
      * @param {string} [issuingOrganization] 
-     * @param {Date} [issueDate] 
+     * @param {string} [issueDate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CertificateApi
      */
-    public async apiCertificateCertificatesCertificateIdPutForm(certificateId: number, certificateName?: string, issuingOrganization?: string, issueDate?: Date, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiCertificateCertificatesCertificateIdPutForm(certificateId: number, certificateName?: string, issuingOrganization?: string, issueDate?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return CertificateApiFp(this.configuration).apiCertificateCertificatesCertificateIdPutForm(certificateId, certificateName, issuingOrganization, issueDate, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -335,12 +335,12 @@ export class CertificateApi extends BaseAPI {
      * @param {string} resumeId 
      * @param {string} [certificateName] 
      * @param {string} [issuingOrganization] 
-     * @param {Date} [issueDate] 
+     * @param {string} [issueDate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CertificateApi
      */
-    public async apiCertificateCertificatesResumeIdPostForm(resumeId: string, certificateName?: string, issuingOrganization?: string, issueDate?: Date, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiCertificateCertificatesResumeIdPostForm(resumeId: string, certificateName?: string, issuingOrganization?: string, issueDate?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return CertificateApiFp(this.configuration).apiCertificateCertificatesResumeIdPostForm(resumeId, certificateName, issuingOrganization, issueDate, options).then((request) => request(this.axios, this.basePath));
     }
 }

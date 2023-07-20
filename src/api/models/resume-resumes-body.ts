@@ -31,12 +31,6 @@ export interface ResumeResumesBody {
     title?: string;
     /**
      * 
-     * @type {Date}
-     * @memberof ResumeResumesBody
-     */
-    creationDate?: Date;
-    /**
-     * 
      * @type {Blob}
      * @memberof ResumeResumesBody
      */
@@ -97,16 +91,16 @@ export interface ResumeResumesBody {
     unknownSectionDescription?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof ResumeResumesBody
      */
-    unknownSectionStartDate?: Date;
+    unknownSectionStartDate?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof ResumeResumesBody
      */
-    unknownSectionEndDate?: Date;
+    unknownSectionEndDate?: string;
     /**
      * 
      * @type {string}

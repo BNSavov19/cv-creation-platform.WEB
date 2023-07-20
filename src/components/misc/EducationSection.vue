@@ -13,13 +13,12 @@ import educationService from '@/services/education-service';
 const props = defineProps<{
     educations?: Array<EducationVM> | null | undefined,
     resumeId?: string,
-    resumeCreationDate?: Date | undefined,
 }>();
 
 const emits = defineEmits(['value:updated'])
 
 function addEducation() {
-    educationService.addEducationToResume(props.resumeId!, {instituteName:null, degree: null, fieldOfStudy: null, startDate: props.resumeCreationDate, endDate:  props.resumeCreationDate} as EducationVM).then(()=>{
+    educationService.addEducationToResume(props.resumeId!, {instituteName:'', degree: '', fieldOfStudy: '', startDate: new Date(), endDate: new Date()} as EducationVM).then(()=>{
         emits('value:updated');
     })
 }

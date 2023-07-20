@@ -37,14 +37,14 @@ export interface EducationsEducationIdBody {
     fieldOfStudy?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof EducationsEducationIdBody
      */
-    startDate?: Date;
+    startDate?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof EducationsEducationIdBody
      */
-    endDate?: Date;
+    endDate?: string;
 }

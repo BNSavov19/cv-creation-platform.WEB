@@ -13,13 +13,13 @@ export class WorkExperienceService extends WebApiService {
 
     public async addWorkExperienceToResume(resumeId: string, workExperienceData: WorkExperienceVM): Promise<AxiosResponse<any>> {
         return await this.workExperienceApi.apiWorkExperienceWorkExperiencesResumeIdPostForm(resumeId, workExperienceData!.companyName!, workExperienceData!.position!,
-            workExperienceData!.startDate!, workExperienceData!.endDate!, workExperienceData!.location!, workExperienceData!.description!, this.generateHeader());
+            workExperienceData!.startDate!.toDateString(), workExperienceData!.endDate!.toDateString(), workExperienceData!.location!, workExperienceData!.description!, this.generateHeader());
     }
 
     public async updateWorkExperience(workExperienceId: number, workExperienceData: WorkExperienceVM): Promise<AxiosResponse<any>>
     {
         return await this.workExperienceApi.apiWorkExperienceWorkExperiencesWorkExperienceIdPutForm(workExperienceId,workExperienceData!.companyName!, workExperienceData!.position!,
-            workExperienceData!.startDate!, workExperienceData!.endDate!, workExperienceData!.location!, workExperienceData!.description!, this.generateHeader())
+            new Date().toDateString(), new Date().toDateString(), workExperienceData!.location!, workExperienceData!.description!, this.generateHeader())
     }
 
     public async deleteWorkExperience(workExperienceId: number)

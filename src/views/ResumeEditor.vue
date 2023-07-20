@@ -14,7 +14,7 @@
 
         <div class="sidebar-section">
             <div class="form-section">
-                <PersonalDetailsForm  v-if="resume.personalInfo" :personalInfoData="resume.personalInfo" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" :templateName="resume.template?.templateName!" @value:updated="updateValue"/>
+                <PersonalDetailsForm  v-if="resume.personalInfo" :personalInfoData="resume.personalInfo" :resumeId="resume.id!" :templateName="resume.template?.templateName!" @value:updated="updateValue"/>
             </div>
             <div class="form-section">
                 <EmploymentHistorySection :employments="resume.workExperiences" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" @updatedValue="updateValue"/>
@@ -23,7 +23,7 @@
                 <EducationSection :educations="resume.educations" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" @value:updated="updateValue"/>
             </div>
             <div class="form-section">
-                <SkillsSection :skills="resume.skills"/>
+                <SkillsSection :skills="resume.skills" :resumeId="resume.id!" :recommendedSkills="recommendedSkills" @updated:value="updateValue"/>
             </div>
         </div>
     
@@ -37,7 +37,7 @@
             
             <div class="templates-popup-container" :class="shouldDisplayTemplatesPopup ? 'templates-popup-container-active' : ''">
                 <div class="templates-popup">
-                    <TemplatesSlider :templates="['template1', 'Moscow', 'template2', 'template3']" @template:selected="onTemplateSelected"/>
+                    <TemplatesSlider :templates="['Washington', 'Moscow', 'template2', 'template3']" @template:selected="onTemplateSelected"/>
                     <IconClose @click="shouldDisplayTemplatesPopup = false" class="close-button"/>
                 </div>
             </div>
@@ -64,6 +64,8 @@ import TemplatesSlider from '@/components/TemplatesSlider.vue';
 import Navbar from '@/components/Navbar.vue';
 import ShareResumeForm from '@/components/forms/ShareResumeForm.vue';
 import IconClose from '@/components/icons/IconClose.vue'
+import recommendationService from '@/services/recommendation-service';
+
 const route = useRoute();
 let resume: Ref<ResumeVM> = ref({});
     
@@ -74,6 +76,7 @@ let previewSectionElement = useElementSize(previewSection);
 
 let shouldDisplayTemplatesPopup: Ref<boolean> = ref(false);
 let shouldDisplayResumeShareForm: Ref<boolean> = ref(false);
+let recommendedSkills: Ref<Array<string>> = ref([]);
 
 onMounted(async ()=>{
 
@@ -93,6 +96,10 @@ onMounted(async ()=>{
 
 async function updateValue() {
    resume.value = (await resumeService.getResumeById(route.params.id as string)).data;
+
+   recommendationService.getSkillRecommendations('Dynamic Executive with six years of experience helping organizations reach their full potential. Adept in making key decisions and working with other professionals to achieve goals and solve problems. Experienced in managing employee and community programs, and dedicated to successfully directing business operations.').then((res)=>{
+    recommendedSkills.value = res.data;
+   });
 }
 
 function addEducation() {
@@ -134,8 +141,8 @@ function makePDF() {
 async function onTemplateSelected(template: string)
 {
     
-    resumeService.updateResume(resume.value.id!, storageService.retrieveUserId()!, resume.value.title!, resume.value.creationDate!, resume.value.personalInfo!, undefined, resume.value.unknownSection?.title!,
-    resume.value.unknownSection?.description!, resume.value.unknownSection?.startDate!, resume.value.unknownSection?.endDate!, template).then(updateValue).then(_=>shouldDisplayTemplatesPopup.value = false);
+    resumeService.updateResume(resume.value.id!, storageService.retrieveUserId()!, resume.value.title!, resume.value.personalInfo!, undefined, resume.value.unknownSection?.title!,
+    resume.value.unknownSection?.description!, new Date().toDateString(), new Date().toDateString(), template).then(updateValue).then(_=>shouldDisplayTemplatesPopup.value = false);
 }
     
 </script>

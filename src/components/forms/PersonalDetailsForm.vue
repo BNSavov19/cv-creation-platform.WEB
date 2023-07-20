@@ -69,7 +69,6 @@ import 'filepond/dist/filepond.min.css'
 const props = defineProps<{
     personalInfoData: PersonalInfoVM | undefined | null,
     resumeId?: string,
-    resumeCreationDate?: Date,
     templateName?: string,
 }>()
 
@@ -91,14 +90,14 @@ function getProfilePic(e: any)
 {
     ProfilePic = e;
     ProfilePicBlob.value = e[0].file;
-    resumeService.updateResume(props.resumeId!, storageService.retrieveUserId()!, '', props.resumeCreationDate!, form.value as PersonalInfoVM, ProfilePicBlob.value, '', '', props.resumeCreationDate!, props.resumeCreationDate!, props.templateName!).then(()=>{
+    resumeService.updateResume(props.resumeId!, storageService.retrieveUserId()!, '', form.value as PersonalInfoVM, ProfilePicBlob.value, '', '', new Date().toDateString(), new Date().toDateString(), props.templateName!).then(()=>{
         emits('value:updated', form.value);
     });
 }
 
 function onUpdateValue()
 {
-    resumeService.updateResume(props.resumeId!, storageService.retrieveUserId()!, '', props.resumeCreationDate!, form.value as PersonalInfoVM, ProfilePicBlob.value, '', '', props.resumeCreationDate!, props.resumeCreationDate!, props.templateName!).then(()=>{
+    resumeService.updateResume(props.resumeId!, storageService.retrieveUserId()!, '', form.value as PersonalInfoVM, undefined, '', '', new Date().toDateString(), new Date().toDateString(), props.templateName!).then(()=>{
         emits('value:updated', form.value);
     });
 }

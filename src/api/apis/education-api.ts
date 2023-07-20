@@ -11,7 +11,7 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import globalAxios, { type AxiosResponse, type AxiosInstance, type AxiosRequestConfig } from 'axios';
+import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -75,12 +75,12 @@ export const EducationApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} [instituteName] 
          * @param {string} [degree] 
          * @param {string} [fieldOfStudy] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiEducationEducationsEducationIdPutForm: async (educationId: number, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: Date, endDate?: Date, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiEducationEducationsEducationIdPutForm: async (educationId: number, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: string, endDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'educationId' is not null or undefined
             if (educationId === null || educationId === undefined) {
                 throw new RequiredError('educationId','Required parameter educationId was null or undefined when calling apiEducationEducationsEducationIdPutForm.');
@@ -151,12 +151,12 @@ export const EducationApiAxiosParamCreator = function (configuration?: Configura
          * @param {string} [instituteName] 
          * @param {string} [degree] 
          * @param {string} [fieldOfStudy] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiEducationEducationsResumeIdPostForm: async (resumeId: string, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: Date, endDate?: Date, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiEducationEducationsResumeIdPostForm: async (resumeId: string, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: string, endDate?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'resumeId' is not null or undefined
             if (resumeId === null || resumeId === undefined) {
                 throw new RequiredError('resumeId','Required parameter resumeId was null or undefined when calling apiEducationEducationsResumeIdPostForm.');
@@ -249,12 +249,12 @@ export const EducationApiFp = function(configuration?: Configuration) {
          * @param {string} [instituteName] 
          * @param {string} [degree] 
          * @param {string} [fieldOfStudy] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiEducationEducationsEducationIdPutForm(educationId: number, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: Date, endDate?: Date, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiEducationEducationsEducationIdPutForm(educationId: number, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: string, endDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
             const localVarAxiosArgs = await EducationApiAxiosParamCreator(configuration).apiEducationEducationsEducationIdPutForm(educationId, instituteName, degree, fieldOfStudy, startDate, endDate, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -267,12 +267,12 @@ export const EducationApiFp = function(configuration?: Configuration) {
          * @param {string} [instituteName] 
          * @param {string} [degree] 
          * @param {string} [fieldOfStudy] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiEducationEducationsResumeIdPostForm(resumeId: string, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: Date, endDate?: Date, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+        async apiEducationEducationsResumeIdPostForm(resumeId: string, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: string, endDate?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
             const localVarAxiosArgs = await EducationApiAxiosParamCreator(configuration).apiEducationEducationsResumeIdPostForm(resumeId, instituteName, degree, fieldOfStudy, startDate, endDate, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -303,12 +303,12 @@ export const EducationApiFactory = function (configuration?: Configuration, base
          * @param {string} [instituteName] 
          * @param {string} [degree] 
          * @param {string} [fieldOfStudy] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiEducationEducationsEducationIdPutForm(educationId: number, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: Date, endDate?: Date, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiEducationEducationsEducationIdPutForm(educationId: number, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: string, endDate?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
             return EducationApiFp(configuration).apiEducationEducationsEducationIdPutForm(educationId, instituteName, degree, fieldOfStudy, startDate, endDate, options).then((request) => request(axios, basePath));
         },
         /**
@@ -317,12 +317,12 @@ export const EducationApiFactory = function (configuration?: Configuration, base
          * @param {string} [instituteName] 
          * @param {string} [degree] 
          * @param {string} [fieldOfStudy] 
-         * @param {Date} [startDate] 
-         * @param {Date} [endDate] 
+         * @param {string} [startDate] 
+         * @param {string} [endDate] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiEducationEducationsResumeIdPostForm(resumeId: string, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: Date, endDate?: Date, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+        async apiEducationEducationsResumeIdPostForm(resumeId: string, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: string, endDate?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
             return EducationApiFp(configuration).apiEducationEducationsResumeIdPostForm(resumeId, instituteName, degree, fieldOfStudy, startDate, endDate, options).then((request) => request(axios, basePath));
         },
     };
@@ -351,13 +351,13 @@ export class EducationApi extends BaseAPI {
      * @param {string} [instituteName] 
      * @param {string} [degree] 
      * @param {string} [fieldOfStudy] 
-     * @param {Date} [startDate] 
-     * @param {Date} [endDate] 
+     * @param {string} [startDate] 
+     * @param {string} [endDate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EducationApi
      */
-    public async apiEducationEducationsEducationIdPutForm(educationId: number, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: Date, endDate?: Date, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiEducationEducationsEducationIdPutForm(educationId: number, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: string, endDate?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return EducationApiFp(this.configuration).apiEducationEducationsEducationIdPutForm(educationId, instituteName, degree, fieldOfStudy, startDate, endDate, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -366,13 +366,13 @@ export class EducationApi extends BaseAPI {
      * @param {string} [instituteName] 
      * @param {string} [degree] 
      * @param {string} [fieldOfStudy] 
-     * @param {Date} [startDate] 
-     * @param {Date} [endDate] 
+     * @param {string} [startDate] 
+     * @param {string} [endDate] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof EducationApi
      */
-    public async apiEducationEducationsResumeIdPostForm(resumeId: string, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: Date, endDate?: Date, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+    public async apiEducationEducationsResumeIdPostForm(resumeId: string, instituteName?: string, degree?: string, fieldOfStudy?: string, startDate?: string, endDate?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return EducationApiFp(this.configuration).apiEducationEducationsResumeIdPostForm(resumeId, instituteName, degree, fieldOfStudy, startDate, endDate, options).then((request) => request(this.axios, this.basePath));
     }
 }

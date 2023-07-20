@@ -20,15 +20,22 @@ export class ResumeService extends WebApiService {
         return await this.resumeApi.apiResumeResumesIdGet(resumeId, this.generateHeader());
     }
     
-    public async updateResume(id:string, userId: string, title: string, creationDate: Date, personalInfo: PersonalInfoVM, photo: Blob | undefined, unkownSectionTitle: string, unkownSectionDescription: string,
-        unknownSectionStartDate: Date, unkownSectionEndDate: Date, templateName: string) {
-        return await this.resumeApi.apiResumeResumesIdPutForm(id, userId, title, creationDate, photo, personalInfo.firstName!, personalInfo.middleName!, personalInfo.lastName!,
+    public async updateResume(id:string, userId: string, title: string, personalInfo: PersonalInfoVM, photo: Blob | undefined, unkownSectionTitle: string, unkownSectionDescription: string,
+        unknownSectionStartDate: string, unkownSectionEndDate: string, templateName: string) {
+        return await this.resumeApi.apiResumeResumesIdPutForm(id, userId, title, photo, personalInfo.firstName!, personalInfo.middleName!, personalInfo.lastName!,
             personalInfo.description!, personalInfo.address!, personalInfo.phoneNumber!, personalInfo.email!, unkownSectionTitle, unkownSectionDescription, unknownSectionStartDate,
             unkownSectionEndDate, templateName, this.generateHeader());
     }
 
     public async shareResume(firstName: string, lastName: string, email: string, resume: Blob) {
         return await this.resumeApi.apiResumeResumesSharePostForm(firstName, lastName, email, resume, this.generateHeader());
+    }
+
+    public async createResume(userId: string, title: string, personalInfo: PersonalInfoVM, photo: Blob | undefined, unkownSectionTitle: string, unkownSectionDescription: string,
+        unknownSectionStartDate: string, unkownSectionEndDate: string, templateName: string): Promise<AxiosResponse<any>> {
+        return await this.resumeApi.apiResumeResumesPostForm(userId, title,  photo, personalInfo.firstName!, personalInfo.middleName!, personalInfo.lastName!,
+            personalInfo.description!, personalInfo.address!, personalInfo.phoneNumber!, personalInfo.email!, unkownSectionTitle, unkownSectionDescription, unknownSectionStartDate,
+            unkownSectionEndDate, templateName, this.generateHeader());
     }
 }
 

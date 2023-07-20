@@ -31,16 +31,16 @@ export interface WorkExperiencesWorkExperienceIdBody {
     position?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof WorkExperiencesWorkExperienceIdBody
      */
-    startDate?: Date;
+    startDate?: string;
     /**
      * 
-     * @type {Date}
+     * @type {string}
      * @memberof WorkExperiencesWorkExperienceIdBody
      */
-    endDate?: Date;
+    endDate?: string;
     /**
      * 
      * @type {string}
