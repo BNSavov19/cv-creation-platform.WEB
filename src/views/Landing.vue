@@ -111,10 +111,8 @@ function onCreateCVButtonClick()
         justify-content: flex-start;
         
         .main-content {
-            background-color: white;
             padding: 3rem;
             border-radius: 3rem;
-            box-shadow: 0px 0px 106px 16px rgba(41,130,254,0.2);
             margin: 0 5rem;
             z-index: 3;
 
@@ -153,8 +151,8 @@ function onCreateCVButtonClick()
         .resumes-wrapper {
             display: flex;
             position: fixed;
-            left: 90rem;
-            top: -10rem;
+            top: -10%;
+            left: 40%;
             rotate: 30deg;
             zoom: 1;
             
@@ -312,6 +310,8 @@ function onCreateCVButtonClick()
             .main-content {
                 margin: 0;
                 text-align: center;
+                background-color: white;
+                box-shadow: 0px 0px 106px 16px rgba(41,130,254,0.2);
                 .landing-title {
                     font-size: 2rem;
                 }
