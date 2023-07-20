@@ -16,6 +16,57 @@
                     <button class="create-cv-button" @click="onCreateCVButtonClick">Create CV</button>
                 </div>
             </div>
+
+            <div class="resumes-wrapper">
+                <div class="resumes up">
+                    <div class="resumes-slide">
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                    </div>
+                    <div class="resumes-slide">
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                    </div>
+                </div>
+                <div class="resumes down">
+                    <div class="resumes-slide">
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                    </div>
+                    <div class="resumes-slide">
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                    </div>
+                </div>
+                <div class="resumes up">
+                    <div class="resumes-slide">
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                    </div>
+                    <div class="resumes-slide">
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                        <div class="resume"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     
         <footer class="page-footer">
@@ -48,20 +99,25 @@ function onCreateCVButtonClick()
 @import '../styles/imports.scss';
 
 .site-wrapper {
-    margin: -0.4rem;
+    margin: -0.5rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     min-height: 99vh;
+    overflow: hidden;
+
     .content-wrapper {
         display: flex;
         justify-content: flex-start;
+        
         .main-content {
+            background-color: white;
             padding: 3rem;
             border-radius: 3rem;
             box-shadow: 0px 0px 106px 16px rgba(41,130,254,0.2);
             margin: 0 5rem;
-            
+            z-index: 3;
+
             .landing-title {
                 font-size: 3.5rem;
                 max-width: 50rem;
@@ -92,7 +148,160 @@ function onCreateCVButtonClick()
                 padding: 1rem 2.8rem;
                 border-radius: 1rem;
             }
-        }   
+        } 
+        
+        .resumes-wrapper {
+            display: flex;
+            position: fixed;
+            left: 90rem;
+            top: -10rem;
+            rotate: 30deg;
+            zoom: 1;
+            
+            .resumes {
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+                z-index: 1;
+
+                &:nth-child(1) {
+                    .resumes-slide {
+                        .resume {
+                            &:nth-child(1) {
+                                background-image: url("../assets/stock-images/artdirector-cv-example-oak-2313782755.png");
+                            }
+    
+                            &:nth-child(2) {
+                                background-image: url("../assets/stock-images/creative_resume_template_thumbnail-3176182311.png");
+                            }
+    
+                            &:nth-child(3) {
+                                background-image: url("../assets/stock-images/Resume.png");
+                            }
+    
+                            &:nth-child(4) {
+                                background-image: url("../assets/stock-images/CV Template with Photo.png");
+                            }
+        
+                            &:nth-child(5) {
+                                background-image: url("../assets/stock-images/Jorge Ossa CV.png");
+                                margin-bottom: 0rem;
+                            }
+                        }
+                    }
+                }
+
+                &:nth-child(2) {
+                    .resumes-slide {
+                        .resume {
+                            &:nth-child(5) {
+                                background-image: url("../assets/stock-images/artdirector-cv-example-oak-2313782755.png");
+                            }
+    
+                            &:nth-child(3) {
+                                background-image: url("../assets/stock-images/creative_resume_template_thumbnail-3176182311.png");
+                            }
+    
+                            &:nth-child(1) {
+                                background-image: url("../assets/stock-images/Resume.png");
+                            }
+    
+                            &:nth-child(2) {
+                                background-image: url("../assets/stock-images/CV Template with Photo.png");
+                            }
+        
+                            &:nth-child(4) {
+                                background-image: url("../assets/stock-images/Jorge Ossa CV.png");
+                                margin-bottom: 0rem;
+                            }
+                        }
+                    }
+                }
+
+                &:nth-child(3) {
+                    .resumes-slide {
+                        .resume {
+                            &:nth-child(4) {
+                                background-image: url("../assets/stock-images/artdirector-cv-example-oak-2313782755.png");
+                            }
+    
+                            &:nth-child(3) {
+                                background-image: url("../assets/stock-images/creative_resume_template_thumbnail-3176182311.png");
+                            }
+    
+                            &:nth-child(1) {
+                                background-image: url("../assets/stock-images/Resume.png");
+                            }
+    
+                            &:nth-child(5) {
+                                background-image: url("../assets/stock-images/CV Template with Photo.png");
+                            }
+        
+                            &:nth-child(2) {
+                                background-image: url("../assets/stock-images/Jorge Ossa CV.png");
+                                margin-bottom: 0rem;
+                            }
+                        }
+                    }
+                }
+    
+                .resumes-slide {
+                    display: inline-block;
+
+                    .resume {
+                        height: 20rem;
+                        width: 15rem;
+                        pointer-events: none;
+                        background-size: cover; 
+                        background-position: center center; 
+                        background-repeat: no-repeat;
+                        border: 1px solid lightgray;
+                        box-shadow: 0px 0px 15px 1px rgba(42,131,254,0.19);
+                        border-radius: 1rem;
+                        margin: 2rem 1rem;
+                    }
+                }
+            }
+        }
+
+        .resumes.up {
+            .resumes-slide {
+                animation: 50s slide-up infinite linear;
+            }
+        }
+
+        .resumes.down {
+            transform: translateY(-100rem);
+            .resumes-slide {
+                animation: 50s slide-down infinite linear;
+            }
+        }
+
+        @keyframes slide-up {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(-100%);
+            }
+        }
+
+        @keyframes slide-down {
+            from {
+                transform: translateY(0);
+            }
+            to {
+                transform: translateY(100%);
+            }
+        }
+    }
+
+    .page-footer {
+        z-index: 2;
+    }
+
+    .page-header {
+        z-index: 4;
     }
 }
 
@@ -106,6 +315,10 @@ function onCreateCVButtonClick()
                 .landing-title {
                     font-size: 2rem;
                 }
+            }
+
+            .resumes-wrapper {
+                visibility: hidden;
             }
         }
     }
