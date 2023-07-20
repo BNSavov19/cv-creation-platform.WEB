@@ -46,6 +46,11 @@
             </div>
         </div>
     </div>
+
+    <div class="resume-for-export">
+        <Resume :resumeData="resume"></Resume>
+    </div>
+
 </template>
     
 <script lang="ts" setup> 
@@ -131,9 +136,9 @@ function makePDF() {
         hotfixes: ['px_scaling'],
     });
 
-    html2canvas(document.querySelector('#resume-wrapper')!, {
-        width: resumePreviewElement.width.value,
-        height: resumePreviewElement.height.value,
+    html2canvas(document.querySelector('.resume-for-export')!, {
+        width: 595,
+        height: 842 ,
     }).then((canvas)=>{
         const img = canvas.toDataURL('image/png')
 
@@ -154,6 +159,10 @@ async function onTemplateSelected(template: string)
 <style lang="scss" scoped>
 @import '../styles/imports.scss';
 
+.resume-for-export {
+    position: absolute;
+    z-index: -1;
+}
 
 .editor-wrapper {
     position: relative;
@@ -225,6 +234,8 @@ async function onTemplateSelected(template: string)
         box-sizing: border-box;
         padding: 1rem;
         height: calc(100% - 4rem);
+
+
         .resume-preview {
             position: relative;
             transform: scale(v-bind(resumePreviewScale));
