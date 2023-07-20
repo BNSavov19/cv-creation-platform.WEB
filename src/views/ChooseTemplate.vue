@@ -11,27 +11,26 @@
                 class="templates-slider"
                 >
                 <SwiperSlide class="template">
-                    <img src="../assets/images/template-1.png">
+                    <img src="../assets/images/template1.png">
                 </SwiperSlide>
                 <SwiperSlide class="template">
-                    <img src="../assets/images/template-1.png">
+                    <img src="../assets/images/template1.png">
                 </SwiperSlide>
                 <SwiperSlide class="template">
-                    <img src="../assets/images/template-1.png">
+                    <img src="../assets/images/template1.png">
                 </SwiperSlide>
                 <SwiperSlide class="template">
-                    <img src="../assets/images/template-1.png">
+                    <img src="../assets/images/template1.png">
                 </SwiperSlide>
                 <SwiperSlide class="template">
-                    <img src="../assets/images/template-1.png">
+                    <img src="../assets/images/template1.png">
                 </SwiperSlide>
                 <SwiperSlide class="template">
-                    <img src="../assets/images/template-1.png">
+                    <img src="../assets/images/template1.png">
                 </SwiperSlide>
                 <SwiperSlide class="template">
-                    <img src="../assets/images/template-1.png">
+                    <img src="../assets/images/template1.png">
                 </SwiperSlide>
-            
             </Swiper>
         </div>
     </div>
