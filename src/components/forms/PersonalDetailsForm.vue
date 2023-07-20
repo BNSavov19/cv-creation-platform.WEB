@@ -85,7 +85,7 @@ let form = ref({
 
 const FilePond = vueFilePond();
 let ProfilePic: any[] = [];
-let ProfilePicBlob: Ref<Blob> = {};
+let ProfilePicBlob: Ref<Blob> = ref(new Blob);
 
 function getProfilePic(e: any)
 {

@@ -12,11 +12,11 @@
 </template>
 
 <script lang="ts" setup>
-import type { SkillsDTO } from '@/api';
+import type { SkillVM } from '@/api';
 import SkillForm from '../forms/SkillForm.vue';
 
 const props = defineProps<{
-    skills?: Array<SkillsDTO> | null | undefined
+    skills?: Array<SkillVM> | null | undefined
 }>();
 
 const emits = defineEmits(['add:skill'])
