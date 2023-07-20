@@ -7,7 +7,7 @@
                 <div class="profile">
                     <div class="pic-and-username">
                         <img src="../assets/stock-images/user.png" alt="" class="profile-pic">
-                        <h3 class="username">John Doe</h3>
+                        <h3 class="username">Boris Savov</h3>
                         <span class="logout-button" @click="logout">Logout</span>
                     </div>
                 </div>
