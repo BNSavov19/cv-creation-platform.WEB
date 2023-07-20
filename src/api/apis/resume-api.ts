@@ -11,12 +11,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios, { type AxiosResponse, type AxiosInstance, type AxiosRequestConfig } from 'axios';
 import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { ResumeVM } from '../models';
+import { type ResumeVM } from '../models';
 /**
  * ResumeApi - axios parameter creator
  * @export

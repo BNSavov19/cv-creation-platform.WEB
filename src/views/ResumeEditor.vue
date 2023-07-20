@@ -8,7 +8,7 @@
                     <IconClose @click="shouldDisplayResumeShareForm = false"/>
                 </div>
                 <h1>Share resume</h1>
-                <ShareResumeForm/>
+                <ShareResumeForm @share:form:submitted="onShareFormSubmit"/>
             </div>
         </div>
 
@@ -111,21 +111,10 @@ async function updateValue() {
    });
 }
 
-function addEducation() {
-    resume.value.educations?.push({});
+
+function onShareFormSubmit(email: string) {
+    resumeService.shareResume('Boris', 'Savov', email, getBlobFromResume());
 }
-
-function onPersonalInfoUpdated(personalInfo: any) {
-
-    if(resume.value.personalInfo) {
-        resume.value.personalInfo.firstName = personalInfo.FirstName;
-        resume.value.personalInfo.lastName = personalInfo.LastName;
-        resume.value.personalInfo.address = personalInfo.Address;
-        resume.value.personalInfo.description = personalInfo.Description;
-        resume.value.personalInfo.email = personalInfo.Email;
-        resume.value.personalInfo.phoneNumber = personalInfo.Phone;
-    }
-} 
 
 function makePDF() {
     //window.html2canvas = html2canvas;
@@ -145,6 +134,31 @@ function makePDF() {
         doc.addImage(img, "PNG", 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
         doc.save(`${resume.value.personalInfo?.firstName} ${resume.value.personalInfo?.lastName} - Resume.pdf`);
     })
+}
+
+function getBlobFromResume(): Blob
+{
+
+    let blob: Ref<Blob> = ref(new Blob());
+    
+    let doc = new jsPDF({
+        orientation: 'p',
+        unit: 'px',
+        format: 'a4',
+        hotfixes: ['px_scaling'],
+    });
+    
+    html2canvas(document.querySelector('.resume-for-export')!, {
+        width: 595,
+        height: 842 ,
+    }).then((canvas)=>{
+        const img = canvas.toDataURL('image/png')
+        
+        doc.addImage(img, "PNG", 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+        blob.value = new Blob([doc.output()])
+    })
+
+    return blob.value;
 }
 
 async function onTemplateSelected(template: string)

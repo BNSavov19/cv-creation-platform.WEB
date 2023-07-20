@@ -35,7 +35,7 @@ async function onFormSubmit()
         return;
     }
 
-    emits('share:form:submitted', form.value);
+    emits('share:form:submitted', form.value.email);
     vuelidate.value.$reset();
 }
 
