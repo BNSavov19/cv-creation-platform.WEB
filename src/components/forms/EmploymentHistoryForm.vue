@@ -124,15 +124,6 @@ h1 {
     padding: 15px 20px;
     margin-bottom: 15px;
     position: relative;
-
-    .delete-icon {
-        position: absolute;
-        top: 40%;
-        right: -4%;
-        fill: #9fa6bb;
-        display: none;
-        opacity: 0;
-    }
     
     .employment-heading {
         width: 100%;
@@ -153,7 +144,7 @@ h1 {
         .delete-icon {
             position: absolute;
             top: 38%;
-            right: -10%;
+            right: -3.5rem;
             fill: #9fa6bb;
             opacity: 0;
             transition: opacity .1s;

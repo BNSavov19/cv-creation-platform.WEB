@@ -1,4 +1,4 @@
-import { ResumeApi, type ResumeVM } from "@/api";
+import { ResumeApi, type PersonalInfoVM, type ResumeVM } from "@/api";
 import { WebApiService } from "./web-api-service";
 import type { AxiosResponse } from "axios";
 
@@ -19,35 +19,17 @@ export class ResumeService extends WebApiService {
     {
         return await this.resumeApi.apiResumeResumesIdGet(resumeId, this.generateHeader());
     }
+    
+    public async updateResume(id:string, userId: string, title: string, creationDate: Date, personalInfo: PersonalInfoVM, photo: Blob | undefined, unkownSectionTitle: string, unkownSectionDescription: string,
+        unknownSectionStartDate: Date, unkownSectionEndDate: Date, templateName: string) {
+        return await this.resumeApi.apiResumeResumesIdPutForm(id, userId, title, creationDate, photo, personalInfo.firstName, personalInfo.middleName, personalInfo.lastName,
+            personalInfo.description, personalInfo.address, personalInfo.phoneNumber, personalInfo.email, unkownSectionTitle, unkownSectionDescription, unknownSectionStartDate,
+            unkownSectionEndDate, templateName, this.generateHeader());
+    }
 
-    // public async updateResume(resume: ResumeVM, profileImage?: Blob)
-    // {
-
-    //     let employments: WorkExperienceDTO[] = [];
-
-    //     for(let we of resume.workExperiences)
-    //     {
-    //         let employment: WorkExperienceDTO = {
-    //             companyName: we.companyName,
-    //             position: we.position,
-    //             startDate: we.startDate,
-    //             endDate: we.endDate,
-    //             location: we.location,
-    //             description: we.description
-    //         }
-    //         employments.push(employment);
-
-    //     }
-
-    //     await this.resumeApi.apiResumeResumesIdPutForm(resume.id, resume.userId, resume.title, resume.creationDate, profileImage, resume.personalInfo?.photoUrl, 
-    //         resume.personalInfo?.firstName, resume.personalInfo?.middleName, resume.personalInfo?.lastName, resume.personalInfo?.description, resume.personalInfo?.address,
-    //         resume.personalInfo?.phoneNumber, resume.personalInfo?.email, resume.unknownSection?.title, resume.unknownSection?.description, resume.creationDate,
-    //         resume.creationDate, resume.template?.templateName, resume.certificates, resume.educations,  employments , resume.languages, resume.skills,
-    //         this.generateHeader())
-    // }
-
-
-
+    public async shareResume(firstName: string, lastName: string, email: string, resume: Blob) {
+        return await this.resumeApi.apiResumeResumesSharePostForm(firstName, lastName, email, resume, this.generateHeader());
+    }
 }
 
 const resumeService = new ResumeService();

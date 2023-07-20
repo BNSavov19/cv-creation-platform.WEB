@@ -17,10 +17,15 @@
     "@vuelidate/validators": "^2.0.3",
     "@vueuse/core": "^10.2.1",
     "axios": "^1.4.0",
-    "html2pdf.js": "^0.9.0",
+    "dom-to-image-more": "^3.1.6",
+    "html2pdf.js": "^0.9.1",
+    "jspdf": "^2.5.1",
     "lodash.debounce": "^4.0.8",
+    "swiper": "^10.0.4",
     "vue": "^3.3.4",
-    "vue-router": "^4.2.2"
+    "vue-filepond": "^7.0.3",
+    "vue-router": "^4.2.2",
+    "vue3-html2pdf": "^1.1.2"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.2.0",

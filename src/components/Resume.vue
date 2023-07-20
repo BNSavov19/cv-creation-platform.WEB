@@ -1,5 +1,5 @@
 <template>
-    <div class="resume-wrapper" :class="`template-template3`">
+    <div class="resume-wrapper" id="resume-wrapper" :class="`template-${resumeData.template?.templateName}`">
 
         <div class="top-section">
             <div class="photo">

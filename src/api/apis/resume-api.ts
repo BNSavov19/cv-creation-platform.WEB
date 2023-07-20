@@ -375,6 +375,71 @@ export const ResumeApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {string} [firstName] 
+         * @param {string} [lastName] 
+         * @param {string} [receiptantEmail] 
+         * @param {Blob} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        apiResumeResumesSharePostForm: async (firstName?: string, lastName?: string, receiptantEmail?: string, file?: Blob, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/api/Resume/resumes/share`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
+
+            // authentication oauth2 required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("Authorization")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+            }
+
+
+            if (firstName !== undefined) { 
+                localVarFormParams.append('FirstName', firstName as any);
+            }
+
+            if (lastName !== undefined) { 
+                localVarFormParams.append('LastName', lastName as any);
+            }
+
+            if (receiptantEmail !== undefined) { 
+                localVarFormParams.append('ReceiptantEmail', receiptantEmail as any);
+            }
+
+            if (file !== undefined) { 
+                localVarFormParams.append('File', file as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -514,6 +579,22 @@ export const ResumeApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [firstName] 
+         * @param {string} [lastName] 
+         * @param {string} [receiptantEmail] 
+         * @param {Blob} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiResumeResumesSharePostForm(firstName?: string, lastName?: string, receiptantEmail?: string, file?: Blob, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ResumeApiAxiosParamCreator(configuration).apiResumeResumesSharePostForm(firstName, lastName, receiptantEmail, file, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {string} userId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -600,6 +681,18 @@ export const ResumeApiFactory = function (configuration?: Configuration, basePat
          */
         async apiResumeResumesPostForm(userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
             return ResumeApiFp(configuration).apiResumeResumesPostForm(userId, title, creationDate, personalInfoPhoto, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [firstName] 
+         * @param {string} [lastName] 
+         * @param {string} [receiptantEmail] 
+         * @param {Blob} [file] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async apiResumeResumesSharePostForm(firstName?: string, lastName?: string, receiptantEmail?: string, file?: Blob, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ResumeApiFp(configuration).apiResumeResumesSharePostForm(firstName, lastName, receiptantEmail, file, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -690,6 +783,19 @@ export class ResumeApi extends BaseAPI {
      */
     public async apiResumeResumesPostForm(userId?: string, title?: string, creationDate?: Date, personalInfoPhoto?: Blob, personalInfoFirstName?: string, personalInfoMiddleName?: string, personalInfoLastName?: string, personalInfoDescription?: string, personalInfoAddress?: string, personalInfoPhoneNumber?: string, personalInfoEmail?: string, unknownSectionTitle?: string, unknownSectionDescription?: string, unknownSectionStartDate?: Date, unknownSectionEndDate?: Date, templateTemplateName?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return ResumeApiFp(this.configuration).apiResumeResumesPostForm(userId, title, creationDate, personalInfoPhoto, personalInfoFirstName, personalInfoMiddleName, personalInfoLastName, personalInfoDescription, personalInfoAddress, personalInfoPhoneNumber, personalInfoEmail, unknownSectionTitle, unknownSectionDescription, unknownSectionStartDate, unknownSectionEndDate, templateTemplateName, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} [firstName] 
+     * @param {string} [lastName] 
+     * @param {string} [receiptantEmail] 
+     * @param {Blob} [file] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ResumeApi
+     */
+    public async apiResumeResumesSharePostForm(firstName?: string, lastName?: string, receiptantEmail?: string, file?: Blob, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ResumeApiFp(this.configuration).apiResumeResumesSharePostForm(firstName, lastName, receiptantEmail, file, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

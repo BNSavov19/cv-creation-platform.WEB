@@ -18,6 +18,10 @@ export class AuthenticationService extends WebApiService {
     public async makeRegisterRequest(username: string, email: string, password: string): Promise<AxiosResponse<void, any>> {
         return await this.userAuthApi.apiAuthRegisterPostForm(username, email, password, this.generateHeader());
     }
+
+    public async renewToken(refreshToken: string) {
+        return await this.userAuthApi.apiAuthRenewTokenPostForm(refreshToken, this.generateHeader());
+    }
 }
 
 const authService = new AuthenticationService();

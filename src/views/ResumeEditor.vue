@@ -1,37 +1,55 @@
 <template>
-<div class="editor-wrapper">
-    <header class="page-header">
-        <h2 class="header-logo"><RouterLink :to="{path:'/'}"><span class="logo-text">Resu</span><span class="logo-suffix">.me</span></RouterLink></h2>
-    </header>
-    <div class="sidebar-section">
-        <div class="form-section">
-            <PersonalDetailsForm  v-if="resume.personalInfo" :personalInfoData="resume.personalInfo" @value:updated="onPersonalInfoUpdated"/>
-        </div>
-        <div class="form-section">
-            <EmploymentHistorySection :employments="resume.workExperiences" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" @updatedValue="updateValue"/>
-        </div>
-        <div class="form-section">
-            <EducationSection :educations="resume.educations" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" @value:updated="updateValue"/>
-        </div>
-        <div class="form-section">
-            <SkillsSection :skills="resume.skills"/>
-        </div>
-    </div>
+    <Navbar :resumeTitle="'Boris Savov Ful..'" @export:selected="makePDF" @share:selected="shouldDisplayResumeShareForm = true"/>
+    <div class="editor-wrapper">
 
-    <div class="preview-section" ref="previewSection">
-        <div class="resume-preview" ref="resumePreview">
-            <Resume :resumeData="resume"></Resume>
+        <div v-if="shouldDisplayResumeShareForm" class="share-resume-form-container">
+            <div class="form-container">
+                <div class="close-button">
+                    <IconClose @click="shouldDisplayResumeShareForm = false"/>
+                </div>
+                <h1>Share resume</h1>
+                <ShareResumeForm/>
+            </div>
         </div>
-        <button>Download</button>
+
+        <div class="sidebar-section">
+            <div class="form-section">
+                <PersonalDetailsForm  v-if="resume.personalInfo" :personalInfoData="resume.personalInfo" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" :templateName="resume.template?.templateName!" @value:updated="updateValue"/>
+            </div>
+            <div class="form-section">
+                <EmploymentHistorySection :employments="resume.workExperiences" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" @updatedValue="updateValue"/>
+            </div>
+            <div class="form-section">
+                <EducationSection :educations="resume.educations" :resumeId="resume.id!" :resumeCreationDate="resume.creationDate" @value:updated="updateValue"/>
+            </div>
+            <div class="form-section">
+                <SkillsSection :skills="resume.skills"/>
+            </div>
+        </div>
+    
+        <div class="preview-section" ref="previewSection">
+            <div class="resume-preview" ref="resumePreview">
+                <Resume :resumeData="resume"></Resume>
+                <div class="templates-button-overlay">
+                    <button @click="shouldDisplayTemplatesPopup = true">Change Template</button>
+                </div>
+            </div>
+            
+            <div class="templates-popup-container" :class="shouldDisplayTemplatesPopup ? 'templates-popup-container-active' : ''">
+                <div class="templates-popup">
+                    <TemplatesSlider :templates="['template1', 'Moscow', 'template2', 'template3']" @template:selected="onTemplateSelected"/>
+                    <IconClose @click="shouldDisplayTemplatesPopup = false" class="close-button"/>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 </template>
-
+    
 <script lang="ts" setup> 
 import storageService from '@/services/storage-service';
 import router from '@/router';
 import Resume from '@/components/Resume.vue';
-import { onMounted, ref, type Ref } from 'vue'
+import { computed, onMounted, ref, type Ref } from 'vue'
 import { useElementSize, useResizeObserver } from '@vueuse/core'
 import resumeService from '@/services/resume-service'
 import { type ResumeVM, type CertificateVM, type WorkExperienceVM } from '@/api'
@@ -40,7 +58,12 @@ import PersonalDetailsForm from '@/components/forms/PersonalDetailsForm.vue';
 import EmploymentHistorySection from '@/components/misc/EmploymentHistorySection.vue';
 import EducationSection from '@/components/misc/EducationSection.vue';
 import SkillsSection from '@/components/misc/SkillsSection.vue';
-
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
+import TemplatesSlider from '@/components/TemplatesSlider.vue';
+import Navbar from '@/components/Navbar.vue';
+import ShareResumeForm from '@/components/forms/ShareResumeForm.vue';
+import IconClose from '@/components/icons/IconClose.vue'
 const route = useRoute();
 let resume: Ref<ResumeVM> = ref({});
     
@@ -48,6 +71,9 @@ let resumePreviewScale: Ref<number> = ref(0.9);
 let resumePreview = ref(), previewSection = ref();
 let resumePreviewElement = useElementSize(resumePreview);
 let previewSectionElement = useElementSize(previewSection);
+
+let shouldDisplayTemplatesPopup: Ref<boolean> = ref(false);
+let shouldDisplayResumeShareForm: Ref<boolean> = ref(false);
 
 onMounted(async ()=>{
 
@@ -66,10 +92,6 @@ onMounted(async ()=>{
 })
 
 async function updateValue() {
-//     resumeService.getResumeById(route.params.id as string).then((res)=>{
-//         resume.value = res.data;
-//    });
-
    resume.value = (await resumeService.getResumeById(route.params.id as string)).data;
 }
 
@@ -89,21 +111,83 @@ function onPersonalInfoUpdated(personalInfo: any) {
     }
 } 
 
-</script>
+function makePDF() {
+    //window.html2canvas = html2canvas;
+    let doc = new jsPDF({
+        orientation: 'p',
+        unit: 'px',
+        format: 'a4',
+        hotfixes: ['px_scaling'],
+    });
 
+    html2canvas(document.querySelector('#resume-wrapper')!, {
+        width: resumePreviewElement.width.value,
+        height: resumePreviewElement.height.value,
+    }).then((canvas)=>{
+        const img = canvas.toDataURL('image/png')
+
+        doc.addImage(img, "PNG", 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+        doc.save(`${resume.value.personalInfo?.firstName} ${resume.value.personalInfo?.lastName} - Resume.pdf`);
+    })
+}
+
+async function onTemplateSelected(template: string)
+{
+    
+    resumeService.updateResume(resume.value.id!, storageService.retrieveUserId()!, resume.value.title!, resume.value.creationDate!, resume.value.personalInfo!, undefined, resume.value.unknownSection?.title!,
+    resume.value.unknownSection?.description!, resume.value.unknownSection?.startDate!, resume.value.unknownSection?.endDate!, template).then(updateValue).then(_=>shouldDisplayTemplatesPopup.value = false);
+}
+    
+</script>
+    
 <style lang="scss" scoped>
 @import '../styles/imports.scss';
-.editor-wrapper {
-    height: 100vh;
 
+
+.editor-wrapper {
+    position: relative;
+    height: 100vh;
     flex-direction: row;
+    
+    .share-resume-form-container {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 5;
+        background: rgba(6, 4, 27, 0.562);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .form-container {
+            position: relative;
+            width: 50%;
+            background-color: white;
+            width: fit-content;
+            box-sizing: border-box;
+            padding: 2rem 4rem;
+            border-radius: 20px;
+
+            h1 {
+                margin-bottom: 3rem;
+            }
+
+            .close-button {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+                cursor: pointer;
+            }
+        }
+    }
 
     .sidebar-section {
         width: 50%;
         height: fit-content;
         background: white;
         box-sizing: border-box;
-        padding: 70px;
+        padding: 80px;
+        z-index: 4;
 
         .form-section {
             margin-bottom: 3rem;
@@ -112,7 +196,7 @@ function onPersonalInfoUpdated(personalInfo: any) {
 
     .preview-section {
         position: fixed;
-        top: 0px;
+        top: 4rem;
         bottom: 0px;
         right: 0px;
         width: 50%;
@@ -129,9 +213,85 @@ function onPersonalInfoUpdated(personalInfo: any) {
         z-index: 0;
         box-sizing: border-box;
         padding: 1rem;
-
+        height: calc(100% - 4rem);
         .resume-preview {
-            transform: scale(v-bind(resumePreviewScale))
+            position: relative;
+            transform: scale(v-bind(resumePreviewScale));
+            .templates-button-overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 4;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+    
+                &:hover {
+                    button {
+                        visibility: visible;
+                    }
+                }
+    
+                button {
+                    background: #2A83FE;
+                    border: none;
+                    padding: .8rem 2rem;
+                    border-radius: 34px;
+                    color: white;
+                    font-family: 'Manrope';
+                    font-size: 1rem;
+                    visibility:hidden;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: #1b69d6;
+                    }
+                }
+            }
+        }
+
+
+        .templates-popup-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 11, 29, 0.329);
+            z-index: 2;
+            visibility: hidden;
+
+
+            .templates-popup {
+                position: absolute;
+                bottom: -100%;
+                width: 100%;
+                background: rgba(255, 255, 255, 0.87);
+                backdrop-filter: blur(22px);
+                height: fit-content;
+                box-sizing: border-box;
+                padding: 1rem 0rem;
+                padding-top: 4rem;
+                z-index: 3;
+                transition: bottom .2s;
+                border-top: 2px solid rgb(26, 145, 240);;
+                .close-button {
+                    position: absolute;
+                    top: 1rem;
+                    right: 1rem;
+                    cursor: pointer;
+                }
+    
+            }
+        }
+
+        .templates-popup-container-active {
+            visibility: visible;
+            .templates-popup {
+                bottom: 0;
+            }
         }
     }
 }

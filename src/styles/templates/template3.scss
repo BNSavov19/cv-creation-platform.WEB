@@ -5,7 +5,6 @@
 } 
 
 .template-template3 {
-    border: 1px solid black;
     width: 595px;
     height: 842px;
     font-family: 'Lato', sans-serif;
@@ -14,6 +13,7 @@
     color: black;
     box-sizing: border-box;
     padding: 1rem;
+    transform-origin: center center;
 
     .top-section {
         background-color: rgb(41, 184, 184);

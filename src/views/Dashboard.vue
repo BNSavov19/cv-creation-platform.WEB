@@ -1,8 +1,6 @@
 <template>
     <div class="site-wrapper">
-        <header class="page-header">
-            <h2 class="header-logo"><RouterLink :to="{path:'/'}"><span class="logo-text">Resu</span><span class="logo-suffix">.me</span></RouterLink></h2>
-        </header>
+        <Navbar/>
         
         <div class="content-wrapper">
             <div class="side-bar">
@@ -38,6 +36,7 @@ import Resumes from './Resumes.vue';
 import PersonalDetailsForm from '../components/forms/PersonalDetailsForm.vue'
 import type { ResumeDTO } from '@/api';
 import resumeService from '@/services/resume-service';
+import Navbar from '@/components/Navbar.vue';
 import {
     LOCAL_STORAGE_TOKEN_KEY,
     LOCAL_STORAGE_USER_ID_KEY
@@ -70,6 +69,7 @@ function logout() {
 @import '../styles/imports.scss';
 
 .site-wrapper {
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     

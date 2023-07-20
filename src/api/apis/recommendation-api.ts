@@ -45,6 +45,14 @@ export const RecommendationApiAxiosParamCreator = function (configuration?: Conf
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
 
+            // authentication oauth2 required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("Authorization")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
+            }
+
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -67,7 +75,7 @@ export const RecommendationApiAxiosParamCreator = function (configuration?: Conf
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        apiRecommendationRecommendationsPost: async (text?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        apiRecommendationRecommendationsPostForm: async (text?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/api/Recommendation/recommendations`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -78,11 +86,22 @@ export const RecommendationApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+            const localVarFormParams = new FormData();
 
-            if (text !== undefined) {
-                localVarQueryParameter['text'] = text;
+            // authentication oauth2 required
+            if (configuration && configuration.apiKey) {
+                const localVarApiKeyValue = typeof configuration.apiKey === 'function'
+                    ? await configuration.apiKey("Authorization")
+                    : await configuration.apiKey;
+                localVarHeaderParameter["Authorization"] = localVarApiKeyValue;
             }
 
+
+            if (text !== undefined) { 
+                localVarFormParams.append('text', text as any);
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'multipart/form-data';
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
                 query.set(key, localVarQueryParameter[key]);
@@ -93,6 +112,7 @@ export const RecommendationApiAxiosParamCreator = function (configuration?: Conf
             localVarUrlObj.search = (new URLSearchParams(query)).toString();
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = localVarFormParams;
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -127,8 +147,8 @@ export const RecommendationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiRecommendationRecommendationsPost(text?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await RecommendationApiAxiosParamCreator(configuration).apiRecommendationRecommendationsPost(text, options);
+        async apiRecommendationRecommendationsPostForm(text?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await RecommendationApiAxiosParamCreator(configuration).apiRecommendationRecommendationsPostForm(text, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -158,8 +178,8 @@ export const RecommendationApiFactory = function (configuration?: Configuration,
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async apiRecommendationRecommendationsPost(text?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return RecommendationApiFp(configuration).apiRecommendationRecommendationsPost(text, options).then((request) => request(axios, basePath));
+        async apiRecommendationRecommendationsPostForm(text?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return RecommendationApiFp(configuration).apiRecommendationRecommendationsPostForm(text, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -188,7 +208,7 @@ export class RecommendationApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof RecommendationApi
      */
-    public async apiRecommendationRecommendationsPost(text?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return RecommendationApiFp(this.configuration).apiRecommendationRecommendationsPost(text, options).then((request) => request(this.axios, this.basePath));
+    public async apiRecommendationRecommendationsPostForm(text?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return RecommendationApiFp(this.configuration).apiRecommendationRecommendationsPostForm(text, options).then((request) => request(this.axios, this.basePath));
     }
 }

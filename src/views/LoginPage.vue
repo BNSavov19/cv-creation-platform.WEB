@@ -37,6 +37,8 @@ function onLoginAttempt(form: any)
         {
             storageService.saveToken(res.data.jwt);
             storageService.saveUserId(res.data.id);
+            storageService.saveRefreshToken(res.data.refreshToken!);
+            storageService.saveExpDate(res.data.refreshTokenExpirationDate!.toString());
         }
         if(storageService.checkForUserLogin()) router.push({name:'resumes'});
     }).catch((error) => {

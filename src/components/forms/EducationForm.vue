@@ -121,7 +121,7 @@ h1 {
         .delete-icon {
             position: absolute;
             top: 38%;
-            right: -10%;
+            right: -3.5rem;;
             fill: #9fa6bb;
             opacity: 0;
             transition: opacity .1s;

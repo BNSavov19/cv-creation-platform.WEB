@@ -6,9 +6,14 @@
         </div>
 
         <div class="resumes-grid" ref="previewSection">
-            <div v-for="resume in resumes" class="resume-preview" ref="resumePreview" @click="onResumeClick(resume.id)">
-                <Resume :resumeData="resume" class="resume"/>
-                <h1 class="resume-title">{{ resume.title }}</h1>
+           
+
+           
+            <div v-for="resume in resumes" class="resume-preview" ref="resumePreview">
+                <router-link :to="{name: 'editor', params:{id: resume.id}}">
+                    <Resume :resumeData="resume" class="resume"/>
+                    <h1 class="resume-title">{{ resume.title }}</h1>
+                </router-link>
             </div>
         </div>
     </div>
@@ -27,24 +32,19 @@ const props = defineProps<{
 
 let resumePreviewScale: Ref<number> = ref(0.5);
 let resumePreview = ref(), previewSection = ref();
-let resumePreviewElement = useElementSize(resumePreview);
-let previewSectionElement = useElementSize(previewSection);
+
 
 onMounted(() => {
-    resumePreviewScale.value = Math.min(previewSectionElement.width.value / resumePreviewElement.width.value, previewSectionElement.height.value / resumePreviewElement.height.value - 0.1);
-    useResizeObserver(previewSection, (entries)=>{
-        const entry = entries[0];
-        const {width, height} = entry.contentRect;
-        resumePreviewScale.value = Math.min(width / resumePreviewElement.width.value, height / resumePreviewElement.height.value -0.1);
-        console.log(resumePreviewElement.height.value, resumePreviewElement.width.value);
-    })
+    //resumePreviewScale.value = Math.min(previewSectionElement.width.value / resumePreviewElement.width.value, previewSectionElement.height.value / resumePreviewElement.height.value - 0.1);
+    // useResizeObserver(previewSection, (entries)=>{
+    //     const entry = entries[0];
+    //     const {width, height} = entry.contentRect;
+    //     resumePreviewScale.value = Math.min(width / resumePreviewElement.width.value, height / resumePreviewElement.height.value -0.1);
+    //     console.log(resumePreviewElement.height.value, resumePreviewElement.width.value);
+    // })
 
 })
 
-function onResumeClick(_id: string)
-{
-    router.push({name:'editor', params:{id:_id}})
-}
 
 
 </script>
@@ -98,6 +98,7 @@ function onResumeClick(_id: string)
             .resume {
                 border: 1px solid #C9C9C9;
                 margin-bottom: 1rem;
+                pointer-events: none;
             }
             border-radius: 6px;
         }

@@ -14,43 +14,31 @@
 /**
  * 
  * @export
- * @interface UserDTO
+ * @interface ResumesShareBody
  */
-export interface UserDTO {
+export interface ResumesShareBody {
     /**
      * 
      * @type {string}
-     * @memberof UserDTO
+     * @memberof ResumesShareBody
      */
-    id?: string;
+    firstName?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserDTO
+     * @memberof ResumesShareBody
      */
-    username?: string | null;
+    lastName?: string;
     /**
      * 
      * @type {string}
-     * @memberof UserDTO
+     * @memberof ResumesShareBody
      */
-    jwt?: string | null;
+    receiptantEmail?: string;
     /**
      * 
-     * @type {Date}
-     * @memberof UserDTO
+     * @type {Blob}
+     * @memberof ResumesShareBody
      */
-    jwtExpirationDate?: Date | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof UserDTO
-     */
-    refreshToken?: string | null;
-    /**
-     * 
-     * @type {Date}
-     * @memberof UserDTO
-     */
-    refreshTokenExpirationDate?: Date | null;
+    file?: Blob;
 }

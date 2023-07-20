@@ -1,0 +1,157 @@
+@import '../imports.scss';
+
+.Moscow {
+    display: flex;
+    width: 595px;
+    height: 842px;
+    font-family: 'Lato', sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    transform-origin: center center;
+    background: white;
+    color: black;
+    box-sizing: border-box;
+    padding-left: 8rem;
+    padding-right: 2rem;
+    padding-top: 4rem;
+    position: relative;
+    border-radius: 6px;
+
+    .duration {
+        font-family: 'Manrope';
+        color: #7e7d89;
+        font-size: .57rem;
+    }
+
+    h1 {
+        font-size: .9rem;
+    }
+
+    p {
+        font-size: .7rem;
+    }
+
+    .top-section {
+        .photo {
+            width: 3rem;
+            height: 3rem;
+            background: grey;
+            border-radius: 50%;
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .details {
+            font-size: 0.6rem;
+            color: #bbbfc1;
+        }
+
+        .title {
+            font-family: 'Manrope';
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #30314d;
+        }
+    }
+
+    .sections-wrapper {
+        .section {
+            display: grid;
+            width: 100%;
+            margin-bottom: 1rem;
+            
+            .section-title {
+                margin-left: -6rem;
+                font-size: .7rem;
+                font-weight: 600;
+                color: #7e7d89;
+                font-family: 'Gothic A1';
+            }
+
+            .section-data {
+                .work-experience {
+                    margin-bottom: .5rem;
+                    .title {
+                        font-family: 'Manrope';
+                        font-weight: 800;
+                        color: #30314d;
+                    }
+
+                    .duration {
+                        font-family: 'Manrope';
+                        color: #7e7d89;
+                        font-size: .57rem;
+                    }
+
+                    .description {
+                        font-family: 'Manrope';
+                        color: #31324d;
+                        font-size: .6rem;
+                        font-weight: 500;
+                    }
+                }
+
+                .education {
+                    .title {
+                        font-family: 'Manrope';
+                        font-weight: 800;
+                        color: #30314d;
+                    }
+                }
+            }
+
+        }
+
+        .profile-info-section {
+            .profile-info {
+                font-size: .8rem;
+                color: #30314d;
+                font-weight: 500;
+            }
+        }
+
+        .skills-section {
+            .section-data {
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                list-style: circle;
+                padding-left: 1rem;
+                .skill {
+                    font-family: 'Manrope';
+                    font-weight: 500;
+                    font-size: .8rem;
+                    color: #30314d;
+                }
+            }
+        }
+
+        .certification-section {
+            .section-data {
+                font-family: 'Manrope';
+                font-weight: 500;
+                font-size: .8rem;
+                color: #30314d;
+                display: grid;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                
+                .certificate {
+                    margin-bottom: .5rem;
+                    .certificate-issue-date {
+                        font-family: 'Manrope';
+                        color: #7e7d89;
+                        font-size: .57rem;
+
+                    }
+                }
+            }
+        }
+    }
+}

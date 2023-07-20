@@ -1,60 +1,55 @@
 <template>
     <h1>Personal Details</h1>
     <div class="personal-details-form">
+
+        <file-pond
+            class="file-upload"
+            name="GalleryImages"
+            ref="pond"
+            label-idle="Profile picture"
+            v-bind:allow-multiple="false"
+            accepted-file-types="image/webp"
+            v-bind:files="ProfilePic"
+            @updatefiles="getProfilePic"/>
+
         <InputField 
-            :vModel="form.FirstName"
+            :vModel="form.firstName"
             :type="'text'"
             :name="'FirstName'"
             :title="'First Name'"
-            :updateCallback="(value: string)=>{form.FirstName = value}"
+            :updateCallback="(value: string)=>{form.firstName = value}"
             @update:value="onUpdateValue"/>
 
         <InputField 
-            :vModel="form.LastName"
+            :vModel="form.lastName"
             :type="'text'"
             :name="'LastName'"
             :title="'Last Name'"
-            :updateCallback="(value: string)=>{form.LastName = value}"
+            :updateCallback="(value: string)=>{form.lastName = value}"
             @update:value="onUpdateValue"/>
 
         <InputField 
-            :vModel="form.Email"
+            :vModel="form.email"
             :type="'email'"
             :name="'Email'"
             :title="'Email'"
-            :updateCallback="(value: string)=>{form.Email = value}"
+            :updateCallback="(value: string)=>{form.email = value}"
             @update:value="onUpdateValue"/>
 
         <InputField 
-            :vModel="form.Phone"
+            :vModel="form.phoneNumber"
             :type="'text'"
             :name="'Phone'"
             :title="'Phone'"
-            :updateCallback="(value: string)=>{form.Phone = value}"
+            :updateCallback="(value: string)=>{form.phoneNumber = value}"
             @update:value="onUpdateValue"/>
 
         <InputField 
-            :vModel="form.Country"
-            :type="'text'"
-            :name="'Country'"
-            :title="'Country'"
-            :updateCallback="(value: string)=>{form.Country = value}"
-            @update:value="onUpdateValue"/>
-
-        <InputField 
-            :vModel="form.City"
-            :type="'text'"
-            :name="'City'"
-            :title="'City'"
-            :updateCallback="(value: string)=>{form.City = value}"
-            @update:value="onUpdateValue"/>
-
-        <InputField 
-            :vModel="form.Address"
+            :vModel="form.address"
             :type="'text'"
             :name="'Address'"
             :title="'Address'"
-            :updateCallback="(value: string)=>{form.Address = value}"
+            :updateCallback="(value: string)=>{form.address = value}"
             @update:value="onUpdateValue"/>
         
     </div>
@@ -66,27 +61,46 @@ import { onUpdated, ref, type Ref } from 'vue';
 import { useVuelidate } from '@vuelidate/core'
 import { required, helpers} from '@vuelidate/validators'
 import type { PersonalInfoVM } from '@/api';
+import resumeService from '@/services/resume-service';
+import storageService from '@/services/storage-service';
+import vueFilePond from 'vue-filepond'
+import 'filepond/dist/filepond.min.css'
 
 const props = defineProps<{
     personalInfoData: PersonalInfoVM | undefined | null,
+    resumeId?: string,
+    resumeCreationDate?: Date,
+    templateName?: string,
 }>()
 
 const emits = defineEmits(['value:updated']);
 
 let form = ref({
-    FirstName: props.personalInfoData?.firstName,
-    LastName: props.personalInfoData?.lastName,
-    Email: props.personalInfoData?.email,
-    Phone: props.personalInfoData?.phoneNumber,
-    Country: '',
-    City: '',
-    Address: props.personalInfoData?.address,
+    firstName: props.personalInfoData?.firstName,
+    lastName: props.personalInfoData?.lastName,
+    email: props.personalInfoData?.email,
+    phoneNumber: props.personalInfoData?.phoneNumber,
+    address: props.personalInfoData?.address,
 });
 
+const FilePond = vueFilePond();
+let ProfilePic: any[] = [];
+let ProfilePicBlob: Ref<Blob> = {};
+
+function getProfilePic(e: any)
+{
+    ProfilePic = e;
+    ProfilePicBlob.value = e[0].file;
+    resumeService.updateResume(props.resumeId!, storageService.retrieveUserId()!, '', props.resumeCreationDate!, form.value as PersonalInfoVM, ProfilePicBlob.value, '', '', props.resumeCreationDate!, props.resumeCreationDate!, props.templateName!).then(()=>{
+        emits('value:updated', form.value);
+    });
+}
 
 function onUpdateValue()
 {
-    emits('value:updated', form.value);
+    resumeService.updateResume(props.resumeId!, storageService.retrieveUserId()!, '', props.resumeCreationDate!, form.value as PersonalInfoVM, ProfilePicBlob.value, '', '', props.resumeCreationDate!, props.resumeCreationDate!, props.templateName!).then(()=>{
+        emits('value:updated', form.value);
+    });
 }
 
 </script>
