@@ -11,14 +11,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CertificateVM } from './certificate-vm';
-import { EducationVM } from './education-vm';
-import { LanguageVM } from './language-vm';
-import { PersonalInfoVM } from './personal-info-vm';
-import { SkillVM } from './skill-vm';
-import { TemplateVM } from './template-vm';
-import { UnknownSectionVM } from './unknown-section-vm';
-import { WorkExperienceVM } from './work-experience-vm';
+import { type CertificateVM } from './certificate-vm';
+import { type EducationVM } from './education-vm';
+import { type LanguageVM } from './language-vm';
+import { type PersonalInfoVM } from './personal-info-vm';
+import { type SkillVM } from './skill-vm';
+import { type TemplateVM } from './template-vm';
+import { type UnknownSectionVM } from './unknown-section-vm';
+import { type WorkExperienceVM } from './work-experience-vm';
 /**
  * 
  * @export
