@@ -35,7 +35,7 @@
                             :name="'StartDate'"
                             :title="'Start Date'"
                             class="start-date"
-                            :updateCallback="(value: Date)=>{form.startDate = value}"
+                            :updateCallback="(value: any)=>{form.startDate = value}"
                             @update:value="onUpdateValue" />
                 
                         <InputField 
@@ -44,7 +44,7 @@
                             :name="'EndDate'"
                             :title="'End Date'"
                             class="end-date"
-                            :updateCallback="(value: Date)=>{form.endDate = value}"
+                            :updateCallback="(value: any)=>{form.endDate = value}"
                             @update:value="onUpdateValue" />
                     </div>
             
