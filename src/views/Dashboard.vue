@@ -51,7 +51,6 @@ onMounted(async ()=>{
 
     resumeService.getAllResumes(storageService.retrieveUserId()!).then((res)=>{
         resumes.value = res.data;
-        console.log(resumes.value);
     });
 })
 

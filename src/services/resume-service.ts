@@ -11,7 +11,7 @@ export class ResumeService extends WebApiService {
 
     resumeApi: ResumeApi;
 
-    public async getAllResumes(userId: string): Promise<AxiosResponse<Array<ResumeVM>, any>> {
+    public async getAllResumes(userId: string): Promise<AxiosResponse<any, any>> {
         return await this.resumeApi.apiResumeUserResumesUserIdGet(userId, this.generateHeader());
     }
 
@@ -22,8 +22,8 @@ export class ResumeService extends WebApiService {
     
     public async updateResume(id:string, userId: string, title: string, creationDate: Date, personalInfo: PersonalInfoVM, photo: Blob | undefined, unkownSectionTitle: string, unkownSectionDescription: string,
         unknownSectionStartDate: Date, unkownSectionEndDate: Date, templateName: string) {
-        return await this.resumeApi.apiResumeResumesIdPutForm(id, userId, title, creationDate, photo, personalInfo.firstName, personalInfo.middleName, personalInfo.lastName,
-            personalInfo.description, personalInfo.address, personalInfo.phoneNumber, personalInfo.email, unkownSectionTitle, unkownSectionDescription, unknownSectionStartDate,
+        return await this.resumeApi.apiResumeResumesIdPutForm(id, userId, title, creationDate, photo, personalInfo.firstName!, personalInfo.middleName!, personalInfo.lastName!,
+            personalInfo.description!, personalInfo.address!, personalInfo.phoneNumber!, personalInfo.email!, unkownSectionTitle, unkownSectionDescription, unknownSectionStartDate,
             unkownSectionEndDate, templateName, this.generateHeader());
     }
 
