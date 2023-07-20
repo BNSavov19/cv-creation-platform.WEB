@@ -33,8 +33,7 @@ import router from '@/router';
 import storageService from '@/services/storage-service';
 import { onMounted, ref, type Ref } from 'vue';
 import Resumes from './Resumes.vue';
-import PersonalDetailsForm from '../components/forms/PersonalDetailsForm.vue'
-import type { ResumeDTO } from '@/api';
+import type { ResumeVM } from '@/api';
 import resumeService from '@/services/resume-service';
 import Navbar from '@/components/Navbar.vue';
 import {
@@ -45,7 +44,7 @@ import {
 
 const activeComponent = ref(Resumes);
 
-const resumes: Ref<ResumeDTO[]> = ref([]);
+const resumes: Ref<ResumeVM[]> = ref([]);
 
 onMounted(async ()=>{
     if(!storageService.checkForUserLogin()) router.push({name:'login'});
