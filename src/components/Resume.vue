@@ -42,7 +42,7 @@
                 <h1 class="section-title">Education</h1>
                 <div class="section-data">
                     <div v-for="education in props.resumeData.educations" class="education">
-                        <h1 class="title">{{education.degree}}, {{education.fieldOfStudy}}, {{education.instituteName}}</h1>
+                        <h1 class="title"><span v-if="education.degree && education.degree != 'null'">{{education.degree}},</span> <span v-if="education.fieldOfStudy && education.fieldOfStudy != 'null'">{{education.fieldOfStudy}},</span> <span v-if="education.instituteName && education.instituteName != 'null'">{{education.instituteName}}</span></h1>
                         <span class="duration">{{education.startDate}} - {{education.endDate}}</span>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                 <h1 class="section-title">Certifications</h1>
                 <div class="section-data">
                     <div v-for="certificate in props.resumeData.certificates" class="certificate">
-                        <span class="certificate-name">{{certificate.certificateName}}</span><br>
+                        <span class="certificate-name">{{certificate.certificateName}}</span><span v-if="certificate.issuingOrganization">, {{certificate.issuingOrganization}}</span><br>
                         <span class="certificate-issue-date">{{certificate.issueDate}}</span>
                     </div>
                 </div>

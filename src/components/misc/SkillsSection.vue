@@ -1,8 +1,9 @@
 <template>
     <h1 class="heading">Skills</h1>
 
+    <h1 class="suggestions-heading">Ai Generated Suggestions:</h1>
     <div class="suggestions-container">
-        <div class="skill" v-for="skill in props.recommendedSkills.slice(0, 10)" @click="onRecommendationClick(skill)">{{skill}}</div>
+        <div class="skill" v-for="skill in props.recommendedSkills.filter((element, index, array) => array.indexOf(element) === index ).slice(0, 10)" @click="onRecommendationClick(skill)">{{skill}}</div>
     </div>
 
     <div class="skills-forms-container">
@@ -53,6 +54,13 @@ function onDeleteSkill(id: number) {
 <style lang="scss" scoped>
 @import '../../styles/imports.scss';
 
+
+.suggestions-heading {
+    font-size: 1rem;
+    color: rgb(92, 181, 255);
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
 .heading {
     font-family: 'Gothic A1';
     font-size: 1.6rem;

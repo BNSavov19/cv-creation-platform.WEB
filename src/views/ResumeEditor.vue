@@ -25,6 +25,9 @@
             <div class="form-section">
                 <SkillsSection :skills="resume.skills" :resumeId="resume.id!" :recommendedSkills="recommendedSkills" @updated:value="updateValue"/>
             </div>
+            <div class="form-section">
+                <CertificateSection :certificates="resume.certificates" :resumeId="resume.id!" @value:updated="updateValue"/>
+            </div>
         </div>
     
         <div class="preview-section" ref="previewSection">
@@ -65,6 +68,7 @@ import Navbar from '@/components/Navbar.vue';
 import ShareResumeForm from '@/components/forms/ShareResumeForm.vue';
 import IconClose from '@/components/icons/IconClose.vue'
 import recommendationService from '@/services/recommendation-service';
+import CertificateSection from '@/components/misc/CertificateSection.vue';
 
 const route = useRoute();
 let resume: Ref<ResumeVM> = ref({});

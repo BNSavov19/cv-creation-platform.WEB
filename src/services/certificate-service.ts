@@ -13,14 +13,14 @@ export class CertificateService extends WebApiService {
 
     public async addCertificateToResume(resumeId: string, certificateData: CertificateVM): Promise<AxiosResponse<any>> {
         return await this.certificateApi.apiCertificateCertificatesResumeIdPostForm(resumeId, certificateData!.certificateName!, certificateData!.issuingOrganization!,
-            certificateData!.issueDate!.toDateString(), this.generateHeader());
+           new Date().toDateString(), this.generateHeader());
     }
     
 
     public async updateCertificate(certificateId: number, certificateData: CertificateVM): Promise<AxiosResponse<any>>
     {
         return await this.certificateApi.apiCertificateCertificatesCertificateIdPutForm(certificateId, certificateData!.certificateName!, certificateData!.issuingOrganization!,
-            certificateData!.issueDate!.toDateString(), this.generateHeader())
+            new Date().toDateString(), this.generateHeader())
     }
 
     public async deleteCertificate(certificateId: number)
