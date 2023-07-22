@@ -112,8 +112,9 @@ async function updateValue() {
 }
 
 
-function onShareFormSubmit(email: string) {
-    resumeService.shareResume('Boris', 'Savov', email, getBlobFromResume());
+async function onShareFormSubmit(email: string) {
+    let blob = await blobToBase64(getBlobFromResume());
+    resumeService.shareResume('Boris', 'Savov', email, blob as Blob);
 }
 
 function makePDF() {
@@ -159,6 +160,14 @@ function getBlobFromResume(): Blob
     })
 
     return blob.value;
+}
+
+function blobToBase64(blob: Blob) {
+  return new Promise((resolve, _) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.readAsDataURL(blob);
+  });
 }
 
 async function onTemplateSelected(template: string)
@@ -296,7 +305,7 @@ async function onTemplateSelected(template: string)
             width: 100%;
             height: 100%;
             background: rgba(4, 11, 29, 0.329);
-            z-index: 2;
+            z-index: 6;
             visibility: hidden;
 
 
@@ -310,7 +319,7 @@ async function onTemplateSelected(template: string)
                 box-sizing: border-box;
                 padding: 1rem 0rem;
                 padding-top: 4rem;
-                z-index: 3;
+                z-index: 6;
                 transition: bottom .2s;
                 border-top: 2px solid rgb(26, 145, 240);;
                 .close-button {

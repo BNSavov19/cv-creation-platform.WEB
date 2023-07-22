@@ -6,7 +6,7 @@
         </div>
 
         <div class="input-wrapper">
-            <input type="text" placeholder="Password" v-model="form.password" />
+            <input type="password" placeholder="Password" v-model="form.password" />
             <span class="error" v-if="vuelidate.password.$error">{{ vuelidate.password.$errors[0].$message }}</span>
         </div>
 
